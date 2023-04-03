@@ -1,0 +1,31 @@
+body {
+  font-family: "Poppins", sans-serif;
+  // font-size: 1.6rem;
+}
+
+html {
+  font-size: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.padding {
+  padding: 40px 112px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.maxWidth {
+  margin: 0 auto;
+  max-width: 1440px;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .padding {
+    padding: 27px 16px;
+  }
+}
