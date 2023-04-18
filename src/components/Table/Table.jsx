@@ -6,10 +6,7 @@ import { useEffect } from 'react';
 
 const Table = () => {
 
-  // const [itemCount, setItemCount] = useState(1);
   const [rows, setRows] = useState(Array(1).fill({id: 0}));
-  let itemCount = rows.length;
-
   
   const tableRows = rows.map((item, index) => {
     return (
@@ -70,20 +67,8 @@ const Table = () => {
     )
   })
 
-  // useEffect(() => {
-  //   const handleRemove = (index) => {
-  //     console.log('removed', index);
-  //     const updatedRows = rows.filter(item => item.id !== index)
-  //     console.log('updatedRows', updatedRows);
-  
-  //     setRows((prevRows) => prevRows.filter(item => item !== index));
-  //   }
-  // })
-
   const handleClick = () => {
     console.log('add', rows);
-    // itemCount = itemCount + 1;
-    // setItemCount(itemCount + 1);
     const lastId = rows.length ? rows[rows.length - 1].id : 0;
     console.log('lastId', lastId);
     setRows((prevRows) => [...prevRows, {id: lastId + 1}]);
