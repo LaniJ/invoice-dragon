@@ -6,7 +6,7 @@ import Typewriter from "typewriter-effect";
 import InvoiceTemplate from "../components/InvoiceTemplate/InvoiceTemplate";
 import Form from "../components/Form/Form";
 import Previewed from "../components/Preview/Preview";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,23 +15,36 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [service, setService] = useState('invoice');
   const [showPreview, setShowPreview] = useState(false);
+  const [formData, setFormData] = useState({});
 
 
   const handleChange = (e) => {
-    console.log('val', e.target.value);
+    // console.log('val', e.target.value);
     setService(e.target.value);
   }
   const handleBizChange = (val) => {
     console.log('val in parent', val);
     setBusinessName(val);
   }
-  const handleEmailChange = (val) => {
-    console.log('val in parent', val);
-    setEmail(val);
+  const handleFormChange = (name, value) => {
+    console.log('aaa val in parent');
+    setFormData({
+      ...formData, [name]: value
+    })
   }
   const handleToggle = () => {
+    console.log('Here is the form data', formData)
     setShowPreview(!showPreview);
   }
+
+  // useEffect(() => {
+  //   const handleFormChange = (name, value) => {
+  //     console.log('val in parent');
+  //     setFormData({
+  //       ...formData, [name]: value
+  //     })
+  //   }
+  // }, handleFormChange)
 
   return (
     <>
@@ -72,13 +85,18 @@ export default function Home() {
           {!showPreview && <Form
             businessName={businessName}
             onBizMod={handleBizChange}
-            onEmailMod={handleEmailChange}
+            onEmailMod={handleFormChange}
             email={email}
             onPreviewToggle={handleToggle}
           />}
+          {showPreview && <p>
+            this id the data ---
+            </p>
+          }
+            {/* businessName={businessName}
+            email={email} */}
           {showPreview && <Previewed 
-            businessName={businessName}
-            email={email}
+            {...formData}
             onPreviewToggle={handleToggle}
           />}
           {/* <form>
