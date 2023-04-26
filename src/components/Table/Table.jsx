@@ -4,13 +4,12 @@ import styles from '../Form/form.module.scss';
 import { useEffect } from 'react';
 
 
-const Table = () => {
+const Table = ({ rows, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow }) => {
 
-  const [rows, setRows] = useState(Array(1).fill({id: 0}));
   
   const tableRows = rows.map((item, index) => {
     return (
-      <React.Fragment key={index}>
+      <React.Fragment key={item.id}>
         <tr className={styles.item__row}>
           <td className={styles.item__row__actions}>
             <div className={styles.confirm__delete__button}>
@@ -30,15 +29,21 @@ const Table = () => {
               type="text" 
               name="description" 
               id="description"
-              key={`des-input_${index}`}
+              key={`des-input_${item.id}`}
               placeholder="Item Description"
               maxLength={20}
+              onChange={(e) => handleChange(e, item.id)}
+              value={item.description || ''} 
             />
             <textarea
               name="details" 
               id="details"
+              key={`details-input_${item.id}`}
               placeholder="Additional details..."
-              className={`${styles.input__default} ${styles.details}`}></textarea>
+              className={`${styles.input__default} ${styles.details}`}
+              onChange={(e) => handleChange(e, item.id)}
+              value={item.details || ''} 
+              ></textarea>
           </td>
           <td className={styles.rate}>
             <input 
@@ -48,6 +53,9 @@ const Table = () => {
               id="rate" 
               placeholder="0.00"
               maxLength={20}
+              key={`rate-input_${item.id}`}
+              onChange={(e) => handleChange(e, item.id)}
+              value={item.rate || ''} 
             />
           </td>
           <td className={styles.qty}>
@@ -58,9 +66,12 @@ const Table = () => {
               id="quantity" 
               placeholder="0"
               maxLength={15}
+              key={`qty-input_${item.id}`}
+              onChange={(e) => handleChange(e, item.id)}
+              value={item.quantity || ''} 
             />
           </td>
-          <td className={styles.amount}>$0.00</td>
+          <td className={styles.amount}>${item.rate * item.quantity}.00</td>
           <td className={styles.tax}>Tax</td>
         </tr>
       </React.Fragment >
@@ -68,23 +79,16 @@ const Table = () => {
   })
 
   const handleClick = () => {
-    console.log('add', rows);
-    const lastId = rows.length ? rows[rows.length - 1].id : 0;
-    console.log('lastId', lastId);
-    setRows((prevRows) => [...prevRows, {id: lastId + 1}]);
+    onAddInvoiceRow();
   }
 
   const handleRemove = (id) => {
-    console.log('removed', id, rows);
-    const updatedRows = rows.filter(item => item.id !== id)
-    console.log('updatedRows', updatedRows);
-    setRows(updatedRows);
+    onRemoveInvoiceRow(id);
   }
 
-  // const deleteItem = (id) => {
-  //   const currentTodos = todos.filter(task => task.id !== id);
-  //   setTodos(currentTodos);
-  // }
+  const handleChange = (e, id) => {
+    onModifyTable(e, id);
+  }
 
   return ( 
     <div>

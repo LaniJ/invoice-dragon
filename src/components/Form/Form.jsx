@@ -2,34 +2,18 @@ import { style } from "d3";
 import { useState } from "react";
 import styles from './form.module.scss';
 import Table from '../Table/Table'
+import { useEffect } from "react";
 
-const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
-  // const [businessName, setBusinessName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [submitted, setSubmitted] = useState(false);
+const Form = ({ prefill, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowAdd, onRowRemove }) => {
 
   const handleChange = (e) => {
     e.preventDefault();
     const name = e.target.name;
     const value = e.target.value;
     console.log('new change', name, value);
-    onEmailMod(name, value);
+    onFormMod(name, value);
   }
 
-  // const handleChange = ({ target: { name, value }}) => {
-  //   e.preventDefault();
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   console.log('new change', name, value);
-  //   onEmailMod(name, value);
-  // }
-
-  // const handleChangeB = (e) => {
-    // e.preventDefault();
-    // console.log(e.target.value);
-    // onBizMod(e.target.value);
-    // setBusinessName(e.target.value);
-  // }
   const toggleViews = () => {
     onPreviewToggle();
   }
@@ -39,7 +23,21 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
     alert('You have submitted the form.');
     console.log('submitted!!!');
 
-    // setSubmitted(true);
+  }
+
+  // Table Functions
+  const updateTable = (e, id) => {
+    onTableUpdate(e, id);
+  }
+  const addRow = () => {
+    onRowAdd();
+  }
+
+  const removeRow = (id) => {
+    onRowRemove(id);
+  }
+  const getExtraProps = (name) => {
+    return isFirstTime ? {value :  prefill[name] } : {}
   }
 
   return (  
@@ -54,6 +52,9 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
             id="formName" 
             placeholder="Invoice "
             onChange={handleChange}
+            value={prefill.formName || ''} 
+            // {...getExtraProps("formName")}
+            // {isFirstTime ? {value :  pri.formName } : {}}
           />
           <div className={styles.photo__drop__zone}>
             <input 
@@ -88,6 +89,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="businessName" 
                 placeholder="Business Name"
                 onChange={handleChange}
+                value={prefill.businessName || ''}  
               />
             </div>
             <div className={styles.form__field}>
@@ -99,6 +101,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                   id="email" 
                   placeholder="name@business.com"
                   onChange={handleChange}
+                  value={prefill.email || ''} 
                 />
             </div>
             <div className={styles.form__field}>
@@ -110,6 +113,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="address" 
                 placeholder="street"
                 onChange={handleChange}
+                value={prefill.address || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -121,6 +125,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="city" 
                 placeholder="city, state"
                 onChange={handleChange}
+                value={prefill.city || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -132,6 +137,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="zipcode" 
                 placeholder="zipcode"
                 onChange={handleChange}
+                value={prefill.zipcode || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -143,6 +149,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="phone" 
                 placeholder="(123) 456 789"
                 onChange={handleChange}
+                value={prefill.phone || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -154,6 +161,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="website" 
                 placeholder="https://example-website.com"
                 onChange={handleChange}
+                value={prefill.website || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -165,6 +173,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="owner" 
                 placeholder="Business owner name"
                 onChange={handleChange}
+                value={prefill.owner || ''} 
               />
             </div>
           </div>
@@ -181,6 +190,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="clientName" 
                 placeholder="Business Name"
                 onChange={handleChange}
+                value={prefill.clientName || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -192,6 +202,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                   id="clientEmail" 
                   placeholder="name@clientemail.com"
                   onChange={handleChange}
+                  value={prefill.clientEmail || ''} 
                 />
             </div>
             <div className={styles.form__field}>
@@ -203,6 +214,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="clientAddress" 
                 placeholder="street"
                 onChange={handleChange}
+                value={prefill.clientAddress || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -214,6 +226,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="clientCity" 
                 placeholder="city, state"
                 onChange={handleChange}
+                value={prefill.clientCity || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -225,6 +238,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="clientZipcode" 
                 placeholder="zipcode"
                 onChange={handleChange}
+                value={prefill.clientZipcode || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -236,6 +250,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="clientPhone" 
                 placeholder="(123) 456 789"
                 onChange={handleChange}
+                value={prefill.clientPhone || ''} 
               />
             </div>
           </div>
@@ -252,6 +267,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="InvoiceNo" 
                 placeholder="INV00001"
                 onChange={handleChange}
+                value={prefill.InvoiceNo || ''} 
               />
             </div>
             {/* change placeholder to be toady's date by default */}
@@ -264,6 +280,7 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="date" 
                 placeholder="Apr 11, 2023"
                 onChange={handleChange}
+                value={prefill.date || ''} 
               />
             </div>
             <div className={styles.form__field}>
@@ -275,97 +292,26 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
                 id="clientWebsite" 
                 placeholder="https://example-website.com"
                 onChange={handleChange}
+                value={prefill.clientWebsite || ''} 
               />
             </div>
           </div>
         </div>
 
         {/* invoice list table */}
-
-        {/* <div>
-          <table className={styles.table}>
-            <thead>
-              <tr className={styles.invoice__headers}>
-                <th className={styles.controls}>&nbsp;</th>
-                <th className={styles.description}>Description</th>
-                <th className={styles.rate}>Rate</th>
-                <th className={styles.qty}>Qty</th>
-                <th className={styles.amount}>Amount</th>
-                <th className={styles.tax}>Tax</th>
-              </tr>
-            </thead>
-            <tbody className={styles.invoice__items}>
-              <tr className={styles.item__row}>
-                <td className={styles.item__row__actions}>
-                  <div className={styles.confirm__delete__button}>
-                    <button title="Remove Item" className={styles.btn__remove}>
-                      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" className={styles.svg__close__icon} role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
-                      </svg>
-                      
-                    </button>
-                  </div>
-                </td>
-                <td className={styles.description}>
-                  <input 
-                    className={styles.input__default}
-                    type="text" 
-                    name="description" 
-                    id="description" 
-                    placeholder="Item Description"
-                    maxLength={20}
-                    onChange={handleChange}
-                  />
-                  <textarea
-                    name="details" 
-                    id="details"
-                    placeholder="Additional details..."
-                    className={`${styles.input__default} ${styles.details}`}></textarea>
-                </td>
-                <td className={styles.rate}>
-                  <input 
-                    className={styles.input__default}
-                    type="text" 
-                    name="rate" 
-                    id="rate" 
-                    placeholder="0.00"
-                    maxLength={20}
-                    onChange={handleChange}
-                  />
-                </td>
-                <td className={styles.qty}>
-                  <input 
-                    className={styles.input__default}
-                    type="text" 
-                    name="quantity" 
-                    id="quantity" 
-                    placeholder="0"
-                    maxLength={15}
-                    onChange={handleChange}
-                  />
-                </td>
-                <td className={styles.amount}>$0.00</td>
-                <td className={styles.tax}>Tax</td>
-              </tr>
-
-              <tr className={styles.item__row}>
-                <td className={styles.item__row__actions}>
-                  <button className={`${styles.add__invoice__item} ${styles.btn__add}`}>
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
-                  </button>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-        </div> */}
-
-        <Table />
+        <Table 
+          rows={rows} 
+          prefill={prefill}
+          onAddInvoiceRow={addRow}
+          onRemoveInvoiceRow={removeRow}
+          onModifyTable={updateTable}/>
         <div>
           <p>Notes</p>
           <textarea
             name="notes" 
             id="notes"
             onChange={handleChange}
+            value={prefill.notes || ''} 
             style={{height: '135px', marginTop: '18px', resize: 'none'}}
             placeholder="Notes - any relevant information not covered, additional terms and conditions."
             className={`${styles.input__default} ${styles.details}`}></textarea>
@@ -395,10 +341,6 @@ const Form = ({ onBizMod, onEmailMod, onPreviewToggle }) => {
           />
           
         </section>
-
-        
-
-
         <button>Create Invoice</button>
       </form>
     </div>

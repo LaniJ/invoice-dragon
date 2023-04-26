@@ -3,7 +3,7 @@ import { Document, Page, Text, Image, View, StyleSheet, Font, PDFViewer } from '
 import { useEffect, useState } from "react";
 // import form from '../../assets/Roboto'
 
-const PDF = ({ formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes, onPreviewToggle }) => {
+const PDF = ({ rows, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes, onPreviewToggle }) => {
   
   // Register font
   // Font.register({ family: 'Roboto', src: "https://fonts.googleapis.com/css2?family=Roboto&display=swap" });
@@ -137,6 +137,7 @@ const PDF = ({ formName, logo, email, businessName, address, city, zipcode, phon
       amount: '$200.00'
     }
   ]
+
   return ( 
     <Document
       author="Lani Juyi"
@@ -180,41 +181,23 @@ const PDF = ({ formName, logo, email, businessName, address, city, zipcode, phon
               </View>
 
 
-              {invoiceData.map(({ id, description, price, qty, amount }) => (
+              {/* {invoiceData.map(({ id, description, price, qty, amount }) => (
                 <View style={styles.invoice_items} key={id}>
                   <Text style={styles.item}>{description}</Text>
                   <Text style={styles.item}>{price}</Text>
                   <Text style={styles.item}>{qty}</Text>
                   <Text style={styles.item}>{amount}</Text>
                 </View>
+              ))} */}
+              
+              {rows.map(({ id, description, details, rate, quantity, amount }) => (
+                <View style={styles.invoice_items} key={id}>
+                  <Text style={styles.item}>{description}</Text>
+                  <Text style={styles.item}>{rate}</Text>
+                  <Text style={styles.item}>{quantity}</Text>
+                  <Text style={styles.item}>{amount}</Text>
+                </View>
               ))}
-
-              {/* <View>
-                <View style={styles.invoice_items}>
-                  <Text style={styles.item}>Service 1</Text>
-                  <Text style={styles.item}>$100.00</Text>
-                  <Text style={styles.item}>1</Text>
-                  <Text style={styles.item}>$100.00</Text>
-                </View>
-                <View style={styles.invoice_items}>
-                  <Text style={styles.item}>Service 2</Text>
-                  <Text style={styles.item}>$100.00</Text>
-                  <Text style={styles.item}>1</Text>
-                  <Text style={styles.item}>$100.00</Text>
-                </View>
-                <View style={styles.invoice_items}>
-                  <Text style={styles.item}>Service 3</Text>
-                  <Text style={styles.item}>$100.00</Text>
-                  <Text style={styles.item}>1</Text>
-                  <Text style={styles.item}>$100.00</Text>
-                </View>
-                <View style={styles.invoice_items}>
-                  <Text style={styles.item}>Service 4</Text>
-                  <Text style={styles.item}>$100.00</Text>
-                  <Text style={styles.item}>1</Text>
-                  <Text style={styles.item}>$100.00</Text>
-                </View>
-              </View> */}
             </View>
             <View style={styles.total_section}>
               <View style={styles.sub}>
@@ -239,32 +222,13 @@ const PDF = ({ formName, logo, email, businessName, address, city, zipcode, phon
               <Text style={styles.item}>Signature</Text>
             </View>
           </View>
-
-
-
-
-          {/* {email && <Text>email should be here --- {email}</Text>}
-          {formName && <Text>formName --- {formName}</Text>}
-          {logo && <Text>logo --- {logo}</Text>}
-          {address && <Text>address --- {address}</Text>}
-          {city && <Text>city --- {city}</Text>}
-          {zipcode && <Text>zipcode --- {zipcode}</Text>}
-          {phone && <Text>phone --- {phone}</Text>}
-          {owner && <Text>owner --- {owner}</Text>}
-          {clientEmail && <Text>clientEmail --- {clientEmail}</Text>}
-          {clientCity && <Text>clientCity --- {clientCity}</Text>}
-          {clientZipcode && <Text>clientZipcode --- {clientZipcode}</Text>}
-          {clientPhone && <Text>clientPhone --- {clientPhone}</Text>}
-          {InvoiceNo && <Text>InvoiceNo --- {InvoiceNo}</Text>}
-          {clientWebsite && <Text>clientWebsite --- {clientWebsite}</Text>}
-          {notes && <Text>notes --- {notes}</Text>} */}
         </View>
       </Page>
     </Document>
    );
 }
 
-const PDFView = ({ formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes, onPreviewToggle }) => {
+const PDFView = ({ rows, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes, onPreviewToggle }) => {
 
   const toggleViews = () => {
     onPreviewToggle();
@@ -290,6 +254,7 @@ const PDFView = ({ formName, logo, email, businessName, address, city, zipcode, 
       
       <PDFViewer className={styles.full}>
         <PDF 
+          rows={rows}
           email={email} 
           businessName={businessName}
           formName={formName}
