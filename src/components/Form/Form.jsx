@@ -299,7 +299,7 @@ const Form = ({ prefill, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowA
               <label htmlFor="date" className={styles.label}>Date</label>
               <input
                 className={styles.input__default}
-                type="text" 
+                type="date" 
                 name="date" 
                 id="date" 
                 placeholder="Apr 11, 2023"

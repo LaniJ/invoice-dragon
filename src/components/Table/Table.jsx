@@ -48,7 +48,7 @@ const Table = ({ rows, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow }) => 
           <td className={styles.rate}>
             <input 
               className={styles.input__default}
-              type="text" 
+              type="number" 
               name="rate" 
               id="rate" 
               placeholder="0.00"
@@ -61,7 +61,7 @@ const Table = ({ rows, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow }) => 
           <td className={styles.qty}>
             <input 
               className={styles.input__default}
-              type="text" 
+              type="number" 
               name="quantity" 
               id="quantity" 
               placeholder="0"
@@ -92,7 +92,6 @@ const Table = ({ rows, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow }) => 
 
   return ( 
     <div>
-      <h3>check</h3>
       {/* <>{tableRows}</> */}
       <table className={styles.table}>
         <thead>
