@@ -15,19 +15,47 @@
   }
   .input__default {
     width: 48%;
+    max-height: 45px;
   }
 
   .photo__drop__zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #fff;
     border: 1px solid #aaa;
     border-radius: 3px;
-    padding: 8px 16px;
+    // padding: 8px 16px;
     border: none;
     cursor: pointer;
   }
   .logo__input {
-    // display: none;
+    display: none;
   }
+}
+
+.img__holder {
+  width: 150px;
+  height: 150px;
+  background-color: cadetblue;
+  border-radius: 5px;
+
+  .logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.image__label {
+  display: flex;
+  padding: 5px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.logoIcon {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
 }
 
 .upload__message, 
@@ -76,11 +104,13 @@
   border: none;
   outline: none;
   height: 0.5px;
-  background: darkgray;
+  background: #e5e7eb;
 }
 
 .row__group {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 2.25rem;
 }
 
 .group {
@@ -211,4 +241,3 @@
     overflow: visible;
     vertical-align: -0.125em;
 }
-

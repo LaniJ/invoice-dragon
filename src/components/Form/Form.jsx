@@ -1,10 +1,13 @@
-import { style } from "d3";
 import { useState } from "react";
 import styles from './form.module.scss';
 import Table from '../Table/Table'
-import { useEffect } from "react";
+import Image from 'next/image'
+
+import logoP from '../../assets/images/placeholder-image.png';
 
 const Form = ({ prefill, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowAdd, onRowRemove }) => {
+  const [logo, setLogo] = useState(logoP);
+  const [logoUpdated, setLogoUpdated] = useState(false);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -32,12 +35,23 @@ const Form = ({ prefill, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowA
   const addRow = () => {
     onRowAdd();
   }
-
   const removeRow = (id) => {
     onRowRemove(id);
   }
   const getExtraProps = (name) => {
     return isFirstTime ? {value :  prefill[name] } : {}
+  }
+
+  const imageHandler = (e) => {
+    console.log(e.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setLogo(reader.result);
+        setLogoUpdated(true);
+      }
+    }
+    reader.readAsDataURL(e.target.files[0]);
   }
 
   return (  
@@ -64,16 +78,26 @@ const Form = ({ prefill, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowA
               name="logo" 
               id="logo" 
               placeholder="Logo"
-              onChange={handleChange}
+              onChange={imageHandler}
             />
-            {/* <div>
-              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path fill="currentColor" d="M464 448H48c-26.51 0-48-21.49-48-48V112c0-26.51 21.49-48 48-48h416c26.51 0 48 21.49 48 48v288c0 26.51-21.49 48-48 48zM112 120c-30.928 0-56 25.072-56 56s25.072 56 56 56 56-25.072 56-56-25.072-56-56-56zM64 384h384V272l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L208 320l-55.515-55.515c-4.686-4.686-12.284-4.686-16.971 0L64 336v48z"></path>
-              </svg>
-              <span>+ Logo</span>
-              <span className={styles.upload__message}>Uploading...</span>
-              <span className={styles.guide__message}>Add logo</span>
-            </div> */}
+            <div className={styles.img__holder}>
+              
+              {logo && <Image
+                src={logo}
+                className={styles.logo}
+                alt="company logo" 
+                width={150}
+                height={150}
+              />}
+            </div>
+            <label htmlFor="logo" className={styles.image__label}>
+              <span>{logoUpdated ? 'Update logo' : 'Add your logo'}</span>
+              <span className={styles.logoIcon}>
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path fill="currentColor" d="M464 448H48c-26.51 0-48-21.49-48-48V112c0-26.51 21.49-48 48-48h416c26.51 0 48 21.49 48 48v288c0 26.51-21.49 48-48 48zM112 120c-30.928 0-56 25.072-56 56s25.072 56 56 56 56-25.072 56-56-25.072-56-56-56zM64 384h384V272l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L208 320l-55.515-55.515c-4.686-4.686-12.284-4.686-16.971 0L64 336v48z"></path>
+                </svg>
+              </span>
+            </label>
           </div>
         </div>
         <div className={styles.invoice__details}>
@@ -324,7 +348,6 @@ const Form = ({ prefill, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowA
             <button
               type='button'
               className={`${styles.add__invoice__item} ${styles.btn__add}`}>
-              {/* class="svg-inline--fa fa-plus fa-w-14"  */}
               <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
             </button>
           </span>
