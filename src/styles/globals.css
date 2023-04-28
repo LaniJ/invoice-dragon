@@ -117,3 +117,35 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+input:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  /* border-color:  #70abad;; */
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+
+::-webkit-datetime-edit {
+  color: #000000;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+/* placeholder text style */
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: #757575;
+}
+
+/* regular text style */
+/* input[type="date"].date-input--has-value::-webkit-datetime-edit-text,
+input[type="date"].date-input--has-value::-webkit-datetime-edit-month-field,
+input[type="date"].date-input--has-value::-webkit-datetime-edit-day-field,
+input[type="date"].date-input--has-value::-webkit-datetime-edit-year-field {
+  color: red;
+} */
