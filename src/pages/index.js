@@ -14,7 +14,7 @@ export default function Home() {
   const [service, setService] = useState('invoice');
   const [showPreview, setShowPreview] = useState(false);
   const [formData, setFormData] = useState({});
-  const [rows, setRows] = useState(Array(1).fill({id: 0}));
+  const [rows, setRows] = useState(Array(1).fill({id: 0, quantity: 1}));
 
 
   const handleChange = (e) => {
@@ -40,7 +40,7 @@ export default function Home() {
   }
   const handleRowAdd = () => {
     const lastId = rows.length ? rows[rows.length - 1].id : 0;
-    setRows((prevRows) => [...prevRows, {id: lastId + 1}]);
+    setRows((prevRows) => [...prevRows, {id: lastId + 1, quantity: 1}]);
   }
 
   const handleRowRemove = (id) => {
