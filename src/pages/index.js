@@ -1,12 +1,13 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/Home.module.scss'
 import Typewriter from "typewriter-effect";
 import InvoiceTemplate from "../components/InvoiceTemplate/InvoiceTemplate";
 import Form from "../components/Form/Form";
 import Previewed from "../components/Preview/Preview";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import Dropdown from '../components/Dropdown/Dropdown';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +16,8 @@ export default function Home() {
   const [showPreview, setShowPreview] = useState(false);
   const [formData, setFormData] = useState({});
   const [rows, setRows] = useState(Array(1).fill({id: 0, quantity: 1}));
+  const [currencyCode, setCurrencyCode] = useState('USD');
+  const [currencySymbol, setCurrencySymbol] = useState('$');
 
 
   const handleChange = (e) => {
@@ -45,6 +48,10 @@ export default function Home() {
 
   const handleRowRemove = (id) => {
     setRows((prevRows) => prevRows.filter(item => item.id !== id));
+  }
+  const handleCurrencyModify = (curr) => {
+    setCurrencyCode(curr.code)
+    setCurrencySymbol(curr.symbol);
   }
 
   return (
@@ -83,21 +90,46 @@ export default function Home() {
             </div>
           </div>
           <InvoiceTemplate service={service}/>
-          {!showPreview && <Form
-            prefill={formData}
-            rows={rows}
-            onFormMod={handleFormChange}
-            onPreviewToggle={handleToggle}
-            onRowAdd={handleRowAdd}
-            onRowRemove={handleRowRemove}
-            onTableUpdate={handleTableUpdate}
-            />}
-          
-          {showPreview && <Previewed 
-            {...formData}
-            rows={rows}
-            onPreviewToggle={handleToggle}
-          />}
+          <div className={styles.template__section}>
+            <div>
+              {!showPreview && <Form
+                prefill={formData}
+                rows={rows}
+                currencySymbol={currencySymbol}
+                onFormMod={handleFormChange}
+                onPreviewToggle={handleToggle}
+                onRowAdd={handleRowAdd}
+                onRowRemove={handleRowRemove}
+                onTableUpdate={handleTableUpdate}
+                />}
+              
+              {showPreview && <Previewed 
+                {...formData}
+                rows={rows}
+                currencySymbol={currencySymbol}
+                onPreviewToggle={handleToggle}
+              />}
+            </div>
+            <div>
+              <label htmlFor="currency-select">CURRENCY</label>
+              <br />
+              <br />
+              <Dropdown
+                currencyCode={currencyCode}
+                currencySymbol={currencySymbol}
+                onCurrencyModify={handleCurrencyModify}
+              />
+            </div>
+          </div>
+            {/* <option
+              value={currency.code}
+              key={currency.code}
+            >
+              <span>{currency.code} -</span>
+              <span>{currency.symbol}</span>
+              <span>
+              </span>
+            </option> */}
           {/* <form>
             <label htmlFor="opt1">
               <input type="radio" name="tester" id='opt1' />

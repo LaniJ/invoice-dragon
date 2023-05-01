@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import logoP from '../../assets/images/placeholder-image.png';
 
-const Form = ({ prefill, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowAdd, onRowRemove }) => {
+const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowAdd, onRowRemove }) => {
   const [logo, setLogo] = useState(logoP);
   const [logoUpdated, setLogoUpdated] = useState(false);
 
@@ -328,6 +328,7 @@ const Form = ({ prefill, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowA
           prefill={prefill}
           onAddInvoiceRow={addRow}
           onRemoveInvoiceRow={removeRow}
+          currencySymbol={currencySymbol}
           onModifyTable={updateTable}/>
         <div>
           <p>Notes</p>

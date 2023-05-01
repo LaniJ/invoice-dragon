@@ -4,10 +4,13 @@ import styles from '../Form/form.module.scss';
 import { useEffect } from 'react';
 
 
-const Table = ({ rows, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow }) => {
+const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow }) => {
 
+  const calculateAmount = (rate, qty) => {
+    return (parseFloat(rate ? rate : 0) * parseFloat(qty ? qty : 0)).toFixed(2);
+  }
   
-  const tableRows = rows.map((item, index) => {
+  const tableRows = rows.map((item, index) => { 
     return (
       <React.Fragment key={item.id}>
         <tr className={styles.item__row}>
@@ -71,8 +74,12 @@ const Table = ({ rows, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow }) => 
               value={item.quantity || ''} 
             />
           </td>
-          <td className={styles.amount}>${item.rate * item.quantity}.00</td>
-          <td className={styles.tax}>Tax</td>
+          {/* <td className={styles.amount}>{currencySymbol} rate - {Number(item.rate)} qty - {item.quantity} {item.rate * item.quantity}</td> */}
+          <td className={styles.amount}>
+            <span>{currencySymbol} </span>
+            <span>{calculateAmount(item.rate, item.quantity)}</span>
+          </td>
+          {/* <td className={styles.tax}>Tax</td> */}
         </tr>
       </React.Fragment >
     )
@@ -101,58 +108,10 @@ const Table = ({ rows, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow }) => 
             <th className={styles.rate}>Rate</th>
             <th className={styles.qty}>Qty</th>
             <th className={styles.amount}>Amount</th>
-            <th className={styles.tax}>Tax</th>
+            {/* <th className={styles.tax}>Tax</th> */}
           </tr>
         </thead>
         <tbody className={styles.invoice__items}>
-          {/* <tr className={styles.item__row}>
-            <td className={styles.item__row__actions}>
-              <div className={styles.confirm__delete__button}>
-                <button title="Remove Item" className={styles.btn__remove}>
-                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" className={styles.svg__close__icon} role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
-                  </svg>
-                  
-                </button>
-              </div>
-            </td>
-            <td className={styles.description}>
-              <input 
-                className={styles.input__default}
-                type="text" 
-                name="description" 
-                id="description" 
-                placeholder="Item Description"
-                maxLength={20}
-              />
-              <textarea
-                name="details" 
-                id="details"
-                placeholder="Additional details..."
-                className={`${styles.input__default} ${styles.details}`}></textarea>
-            </td>
-            <td className={styles.rate}>
-              <input 
-                className={styles.input__default}
-                type="text" 
-                name="rate" 
-                id="rate" 
-                placeholder="0.00"
-                maxLength={20}
-              />
-            </td>
-            <td className={styles.qty}>
-              <input 
-                className={styles.input__default}
-                type="text" 
-                name="quantity" 
-                id="quantity" 
-                placeholder="0"
-                maxLength={15}
-              />
-            </td>
-            <td className={styles.amount}>$0.00</td>
-            <td className={styles.tax}>Tax</td>
-          </tr> */}
           <>{tableRows}</>
           <tr className={styles.item__row}>
             <td className={styles.item__row__actions}>
