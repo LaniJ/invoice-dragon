@@ -91,7 +91,7 @@ export default function Home() {
           </div>
           <InvoiceTemplate service={service}/>
           <div className={styles.template__section}>
-            <div>
+            <div className={styles.main__section}>
               {!showPreview && <Form
                 prefill={formData}
                 rows={rows}
@@ -110,7 +110,17 @@ export default function Home() {
                 onPreviewToggle={handleToggle}
               />}
             </div>
-            <div>
+            <div className={styles.action__section}>
+              <div>
+                ACTIONS
+                <br />
+                <br />
+                <button className={styles.action__btn} onClick={handleToggle}>Preview Invoice</button>
+                <button className={styles.action__btn}>Print</button>
+                <button className={styles.action__btn}>Email</button>
+              </div>
+              <br />
+              <br />
               <label htmlFor="currency-select">CURRENCY</label>
               <br />
               <br />

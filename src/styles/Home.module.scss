@@ -36,6 +36,11 @@
 
 .template__section {
   display: flex;
+  justify-content: space-between;
+
+  .main__section {
+    flex-grow: 1;
+  }
 }
 .select__input {
   padding: 8px 16px;
@@ -51,6 +56,28 @@
     flex: 1;
     flex-grow: 1;
     color: rgb(51, 51, 51);
+  }
+}
+
+.action__btn {
+  box-sizing: border-box;
+  font-weight: 500;
+  border-radius: 6px;
+  background: #444;
+  border: 1px solid #e3e3e3;
+  color: #f9fafb;
+  font-size: 14px;
+  padding: 8px 16px;
+  min-width: 60px;
+  cursor: pointer;
+  // -webkit-transition: ease-in 100ms;
+  // -o-transition: ease-in 100ms;
+  transition: ease-in 100ms;
+  width: 100%;
+
+  &:hover {
+    background: #525252;
+    // color: #f9fafb;
   }
 }
 
