@@ -21,12 +21,12 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTab
     onPreviewToggle();
   }
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    alert('You have submitted the form.');
-    console.log('submitted!!!');
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   alert('You have submitted the form.');
+  //   console.log('submitted!!!');
 
-  }
+  // }
 
   // Table Functions
   const updateTable = (e, id) => {
@@ -57,7 +57,7 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTab
   return (  
     <div>
       <button onClick={toggleViews}>Preview</button>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form className={styles.form}>
         <div className={styles.header}>
           <input 
             className={`${styles.invoice__title} ${styles.input__default}`}
@@ -341,7 +341,9 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTab
             placeholder="Notes - any relevant information not covered, additional terms and conditions."
             className={`${styles.input__default} ${styles.details}`}></textarea>
         </div>
-        <section>
+        {/* Took out signature and photo sections */}
+        
+        {/* <section>
           <span>
             <p>Signature</p>
           </span>
@@ -364,8 +366,7 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTab
             placeholder="Logo"
           />
           
-        </section>
-        <button>Create Invoice</button>
+        </section> */}
       </form>
     </div>
   );
