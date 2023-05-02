@@ -8,6 +8,5 @@ export default function App({ Component, pageProps }) {
     <main className={quicksand.className}>
       <Component {...pageProps} />
     </main>
-    // <Component {...pageProps} />
   )
 }
