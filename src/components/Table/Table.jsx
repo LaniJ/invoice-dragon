@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import React from 'react';
 import styles from '../Form/form.module.scss';
 import { useEffect } from 'react';
 
 
-const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow }) => {
+const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow, onFormSubmit }) => {
+
+  const rateRef = useRef();
+  const quantityRef = useRef();
 
   const calculateAmount = (rate, qty) => {
-    return (parseFloat(rate ? rate : 0) * parseFloat(qty ? qty : 0)).toFixed(2);
+      const amount = (parseFloat(rate ? rate : 0) * parseFloat(qty ? qty : 0)).toFixed(2);
+      return amount;
   }
   
   const tableRows = rows.map((item, index) => { 
@@ -35,7 +39,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               key={`des-input_${item.id}`}
               placeholder="Item Description"
               maxLength={20}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={(e) => handleChange(e, item)}
               value={item.description || ''} 
             />
             <textarea
@@ -44,7 +48,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               key={`details-input_${item.id}`}
               placeholder="Additional details..."
               className={`${styles.input__default} ${styles.details}`}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={(e) => handleChange(e, item)}
               value={item.details || ''} 
               ></textarea>
           </td>
@@ -54,10 +58,11 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               type="number" 
               name="rate" 
               id="rate" 
+              ref={rateRef}
               placeholder="0.00"
               maxLength={20}
               key={`rate-input_${item.id}`}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={(e) => handleChange(e, item)}
               value={item.rate || ''} 
             />
           </td>
@@ -67,17 +72,18 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               type="number" 
               name="quantity" 
               id="quantity" 
+              ref={quantityRef}
               placeholder="0"
               maxLength={15}
               key={`qty-input_${item.id}`}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={(e) => handleChange(e, item)}
               value={item.quantity || ''} 
             />
           </td>
           {/* <td className={styles.amount}>{currencySymbol} rate - {Number(item.rate)} qty - {item.quantity} {item.rate * item.quantity}</td> */}
           <td className={styles.amount}>
             <span>{currencySymbol} </span>
-            <span>{calculateAmount(item.rate, item.quantity)}</span>
+            <span>{calculateAmount(item.rate, item.quantity, item.id)}</span>
           </td>
           {/* <td className={styles.tax}>Tax</td> */}
         </tr>
@@ -93,8 +99,16 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
     onRemoveInvoiceRow(id);
   }
 
-  const handleChange = (e, id) => {
-    onModifyTable(e, id);
+  const handleChange = (e, item) => {
+    let amount;
+
+    if (rateRef?.current && quantityRef?.current) {
+      let rate = Number(rateRef.current.value);
+      let quantity = Number(quantityRef.current.value);
+      amount = calculateAmount(rate, quantity)
+    }
+
+    onModifyTable(e, item.id, amount);
   }
 
   return ( 
@@ -119,7 +133,6 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
                 type='button'
                 onClick={handleClick}
                 className={`${styles.add__invoice__item} ${styles.btn__add}`}>
-                {/* class="svg-inline--fa fa-plus fa-w-14"  */}
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
               </button>
             </td>

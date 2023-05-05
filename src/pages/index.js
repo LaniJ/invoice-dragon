@@ -15,17 +15,15 @@ export default function Home() {
   const [service, setService] = useState('invoice');
   const [showPreview, setShowPreview] = useState(false);
   const [formData, setFormData] = useState({});
-  const [rows, setRows] = useState(Array(1).fill({id: 0, quantity: 1}));
+  const [rows, setRows] = useState(Array(1).fill({id: 0, quantity: 1, amount: '0.00'}));
   const [currencyCode, setCurrencyCode] = useState('USD');
   const [currencySymbol, setCurrencySymbol] = useState('$');
-
 
   const handleChange = (e) => {
     setService(e.target.value);
   }
   
   const handleFormChange = (name, value) => {
-    console.log('aaa val in parent');
     setFormData({
       ...formData, [name]: value
     })
@@ -35,15 +33,23 @@ export default function Home() {
   }
 
    // Table Functions
-   const handleTableUpdate = (e, id) => {
-    const updateTable = [...rows];
-    const currentRowIndex = updateTable.findIndex((row) => row.id === id);
-    updateTable[currentRowIndex] = { ...updateTable[currentRowIndex], [e.target.name]: e.target.value }
-    setRows(updateTable);
+   const handleTableUpdate = (e, id, amount) => {
+    setRows((prevRows) => {
+      const updateTable = [...prevRows];
+      const currentRowIndex = updateTable.findIndex((row) => row.id === id);
+      updateTable[currentRowIndex] = { ...updateTable[currentRowIndex], [e.target.name]: e.target.value }
+      if ( amount !== undefined) {
+        updateTable[currentRowIndex].amount = amount;
+      }
+      if (e.target.name === 'rate' || e.target.name === 'quantity' ) {
+        updateTable[currentRowIndex][e.target.name] = Number(e.target.value);
+      }
+      return updateTable;
+    });
   }
   const handleRowAdd = () => {
     const lastId = rows.length ? rows[rows.length - 1].id : 0;
-    setRows((prevRows) => [...prevRows, {id: lastId + 1, quantity: 1}]);
+    setRows((prevRows) => [...prevRows, {id: lastId + 1, quantity: 1, amount: '0.00'}]);
   }
 
   const handleRowRemove = (id) => {
@@ -53,6 +59,7 @@ export default function Home() {
     setCurrencyCode(curr.code)
     setCurrencySymbol(curr.symbol);
   }
+  // console.log('rows', rows);
 
   return (
     <>

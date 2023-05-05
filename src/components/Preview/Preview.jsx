@@ -3,7 +3,7 @@ import { Document, Page, Text, Image, View, StyleSheet, Font, PDFViewer } from '
 import { useEffect, useState } from "react";
 // import form from '../../assets/Roboto'
 
-const PDF = ({ rows, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes, onPreviewToggle }) => {
+const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes }) => {
   
   // Register font
   // Font.register({ family: 'Roboto', src: "https://fonts.googleapis.com/css2?family=Roboto&display=swap" });
@@ -138,6 +138,14 @@ const PDF = ({ rows, formName, logo, email, businessName, address, city, zipcode
     }
   ]
 
+  const calculateTotal = () => {
+    let sum = 0;
+    rows.forEach(row => {
+      sum += parseFloat(row.amount);
+    })
+    return sum.toFixed(2);
+  }
+
   return ( 
     <Document
       author="Lani Juyi"
@@ -193,9 +201,10 @@ const PDF = ({ rows, formName, logo, email, businessName, address, city, zipcode
               {rows.map(({ id, description, details, rate, quantity, amount }) => (
                 <View style={styles.invoice_items} key={id}>
                   <Text style={styles.item}>{description}</Text>
-                  <Text style={styles.item}>{rate}</Text>
+                  {/* <Text style={styles.item}>{details}</Text> */}
+                  <Text style={styles.item}>{currencySymbol}{rate}</Text>
                   <Text style={styles.item}>{quantity}</Text>
-                  <Text style={styles.item}>{amount}</Text>
+                  <Text style={styles.item}>{currencySymbol}{amount}</Text>
                 </View>
               ))}
             </View>
@@ -213,7 +222,7 @@ const PDF = ({ rows, formName, logo, email, businessName, address, city, zipcode
               </View>
               <View>
                 <Text style={styles.table_header}>TOTAL</Text>
-                <Text style={styles.item}>$550.00</Text>
+                <Text style={styles.item}>{currencySymbol}{calculateTotal()}</Text>
               </View>
             </View>
             <Text style={styles.notes}>{notes}</Text>
@@ -228,11 +237,8 @@ const PDF = ({ rows, formName, logo, email, businessName, address, city, zipcode
    );
 }
 
-const PDFView = ({ rows, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes, onPreviewToggle }) => {
+const PDFView = ({ rows, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes }) => {
 
-  const toggleViews = () => {
-    onPreviewToggle();
-  }
   const saveInvoice = () => {
     console.log('saved');
   }
@@ -246,7 +252,6 @@ const PDFView = ({ rows, formName, logo, email, businessName, address, city, zip
   return ( 
     <>
       <div className={styles.preview__wrapper}>
-        <button onClick={toggleViews}>Edit</button>
 
         <h2>Invoice Template Preview</h2>
         <button onClick={saveInvoice}>Save to PDF</button>

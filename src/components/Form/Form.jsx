@@ -4,22 +4,20 @@ import Table from '../Table/Table'
 import Image from 'next/image'
 
 import logoP from '../../assets/images/placeholder-image.png';
+import { useEffect } from "react";
 
-const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTableUpdate, onRowAdd, onRowRemove }) => {
+const Form = ({ prefill, currencySymbol, rows, onFormMod, onTableUpdate, onRowAdd, onRowRemove }) => {
   const [logo, setLogo] = useState(logoP);
   const [logoUpdated, setLogoUpdated] = useState(false);
+  const [total, setTotal] = useState(0);
 
   const handleChange = (e) => {
     e.preventDefault();
     const name = e.target.name;
     const value = e.target.value;
-    console.log('new change', name, value);
     onFormMod(name, value);
   }
 
-  const toggleViews = () => {
-    onPreviewToggle();
-  }
 
   // const handleSubmit = event => {
   //   event.preventDefault();
@@ -29,8 +27,8 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTab
   // }
 
   // Table Functions
-  const updateTable = (e, id) => {
-    onTableUpdate(e, id);
+  const updateTable = (e, id, amount) => {
+    onTableUpdate(e, id, amount);
   }
   const addRow = () => {
     onRowAdd();
@@ -38,12 +36,12 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTab
   const removeRow = (id) => {
     onRowRemove(id);
   }
-  const getExtraProps = (name) => {
-    return isFirstTime ? {value :  prefill[name] } : {}
-  }
+  // const getExtraProps = (name) => {
+  //   return isFirstTime ? {value :  prefill[name] } : {}
+  // }
 
   const imageHandler = (e) => {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
@@ -54,9 +52,21 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTab
     reader.readAsDataURL(e.target.files[0]);
   }
 
+  useEffect(() => {
+    console.log('effect ' , rows);
+    setTotal(calculateTotal());
+  }, [rows]);
+
+  const calculateTotal = () => {
+    let sum = 0;
+    rows.forEach(row => {
+      sum += parseFloat(row.amount);
+    })
+    return sum;
+  }
+
   return (  
     <div>
-      <button onClick={toggleViews}>Preview</button>
       <form className={styles.form}>
         <div className={styles.header}>
           <input 
@@ -329,7 +339,14 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onPreviewToggle, onTab
           onAddInvoiceRow={addRow}
           onRemoveInvoiceRow={removeRow}
           currencySymbol={currencySymbol}
-          onModifyTable={updateTable}/>
+          onModifyTable={updateTable}
+        />
+        <section className={styles.total__section}>
+          <div className={styles.total}>
+            <span>Total</span>
+            <span className={styles.total}>{currencySymbol}{total.toFixed(2)}</span>
+          </div>
+        </section>
         <div>
           <p>Notes</p>
           <textarea

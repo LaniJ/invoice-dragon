@@ -242,3 +242,12 @@
     overflow: visible;
     vertical-align: -0.125em;
 }
+
+.total__section {
+  text-align: right;
+
+  .total {
+    padding-left: 90px;
+    // display: flex;
+  }
+}
