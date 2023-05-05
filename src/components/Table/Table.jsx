@@ -1,13 +1,11 @@
 import { useRef } from 'react';
 import React from 'react';
 import styles from '../Form/form.module.scss';
-import { useEffect } from 'react';
-
 
 const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow, onFormSubmit }) => {
 
-  const rateRef = useRef();
-  const quantityRef = useRef();
+  const rateRef = useRef([]);
+  const quantityRef = useRef([]);
 
   const calculateAmount = (rate, qty) => {
       const amount = (parseFloat(rate ? rate : 0) * parseFloat(qty ? qty : 0)).toFixed(2);
@@ -35,7 +33,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               className={styles.input__default}
               type="text" 
               name="description" 
-              id="description"
+              id={`description__${item.id}`}
               key={`des-input_${item.id}`}
               placeholder="Item Description"
               maxLength={20}
@@ -44,7 +42,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
             />
             <textarea
               name="details" 
-              id="details"
+              id={`details__${item.id}`}
               key={`details-input_${item.id}`}
               placeholder="Additional details..."
               className={`${styles.input__default} ${styles.details}`}
@@ -57,12 +55,12 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               className={styles.input__default}
               type="number" 
               name="rate" 
-              id="rate" 
-              ref={rateRef}
+              id={`rate__${item.id}`} 
+              ref={el => rateRef.current[index] = el}
               placeholder="0.00"
               maxLength={20}
               key={`rate-input_${item.id}`}
-              onChange={(e) => handleChange(e, item)}
+              onChange={(e) => handleChange(e, item, index)}
               value={item.rate || ''} 
             />
           </td>
@@ -71,12 +69,12 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               className={styles.input__default}
               type="number" 
               name="quantity" 
-              id="quantity" 
-              ref={quantityRef}
+              id={`quantity__${item.id}`} 
+              ref={el => quantityRef.current[index] = el}
               placeholder="0"
               maxLength={15}
               key={`qty-input_${item.id}`}
-              onChange={(e) => handleChange(e, item)}
+              onChange={(e) => handleChange(e, item, index)}
               value={item.quantity || ''} 
             />
           </td>
@@ -99,12 +97,12 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
     onRemoveInvoiceRow(id);
   }
 
-  const handleChange = (e, item) => {
+  const handleChange = (e, item, index) => {
     let amount;
-
-    if (rateRef?.current && quantityRef?.current) {
-      let rate = Number(rateRef.current.value);
-      let quantity = Number(quantityRef.current.value);
+    
+    if (rateRef?.current[index] && quantityRef?.current[index]) {
+      let rate = Number(rateRef.current[index].value);
+      let quantity = Number(quantityRef.current[index].value);
       amount = calculateAmount(rate, quantity)
     }
 
