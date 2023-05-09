@@ -8,6 +8,7 @@ import Form from "../components/Form/Form";
 import Previewed from "../components/Preview/Preview";
 import { useState } from 'react';
 import Dropdown from '../components/Dropdown/Dropdown';
+import logoP from '../assets/images/placeholder-image.png';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +19,8 @@ export default function Home() {
   const [rows, setRows] = useState(Array(1).fill({id: 0, quantity: 1, amount: '0.00'}));
   const [currencyCode, setCurrencyCode] = useState('USD');
   const [currencySymbol, setCurrencySymbol] = useState('$');
+  const [logo, setLogo] = useState(logoP);
+  const [logoUpdated, setLogoUpdated] = useState(false);
 
   const handleChange = (e) => {
     setService(e.target.value);
@@ -59,7 +62,17 @@ export default function Home() {
     setCurrencyCode(curr.code)
     setCurrencySymbol(curr.symbol);
   }
-  // console.log('rows', rows);
+
+  const handleLogoUpdate = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setLogo(reader.result);
+        setLogoUpdated(true);
+      }
+    }
+    reader.readAsDataURL(e.target.files[0]);
+  }
 
   return (
     <>
@@ -102,6 +115,9 @@ export default function Home() {
               {!showPreview && <Form
                 prefill={formData}
                 rows={rows}
+                logo={logo}
+                updateLogo={handleLogoUpdate}
+                logoUpdated={logoUpdated}
                 currencySymbol={currencySymbol}
                 onFormMod={handleFormChange}
                 onPreviewToggle={handleToggle}
@@ -113,6 +129,7 @@ export default function Home() {
               {showPreview && <Previewed 
                 {...formData}
                 rows={rows}
+                logo={logo}
                 currencySymbol={currencySymbol}
                 onPreviewToggle={handleToggle}
               />}

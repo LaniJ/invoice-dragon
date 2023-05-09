@@ -26,22 +26,39 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
       // backgroundColor: 'lightgray',
       backgroundColor: '#FCFBF8',
       padding: 40,
-      color:'#5d5955',
+      paddingTop: 30,
+      color:'#4C3D3D',
       fontFamily: 'Garet'
     },
     invoice_group: {
       flexGrow: 1
     },
     section: {
-      // margin: 10,
       display: 'flex',
       flexDirection: 'row-reverse',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       padding: 10,
       flexGrow: 1,
       borderBottom: '0.5px solid #000000'
     },
+    logo_wrapper: {
+      width: '150',
+      height: '150',
+      marginTop: 30,
+    },
+    logo: {
+      width: '100%',
+      height: '100%',
+    },
     header_details: {
       paddingRight: '25'
+    },
+    formName: {
+      fontSize: '40px',
+      fontFamily: 'League',
+      textTransform: 'uppercase',
+      marginBottom: 10
     },
     bizName: {
       fontSize: '30px',
@@ -60,7 +77,6 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
       fontFamily: 'Garet-Heavy'
     },
     invoice_header: {
-      // display: 'flex',
       flexGrow: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -110,7 +126,7 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
       marginTop: 10,
       marginBottom: 30,
       fontSize: '10px',
-      color:'#5d5955'
+      color:'#4C3D3D'
     },
     footer: {
       flexGrow: 1,
@@ -121,7 +137,6 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
     // template 3
     
   })
-
 
   const calculateTotal = () => {
     let sum = 0;
@@ -141,16 +156,9 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
       <Page size="A4" style={styles.body}>
         
         <View style={{display: 'flex', justifyContent: 'center'}}>
-          {/* <Text wrap={false}>
-            Hello World!
-            Goodbye my lover
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, ratione ipsa. Sed, suscipit labore? Accusantium voluptatum ullam sunt ducimus rem!
-            this is a new line.....
-          </Text> */}
-
-          {/* <Text>Invoice Template Preview</Text> */}
           <View style={styles.section}>
             <View style={styles.header_details}>
+              {formName && <Text style={styles.formName}>{formName}</Text>}
               {businessName && <Text style={styles.bizName}>{businessName}</Text>}
 
               <View style={styles.invoice__details}>
@@ -162,6 +170,9 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
               {clientName && <Text style={styles.font}>{clientName}</Text>}
               {clientAddress && <Text style={styles.font}>{clientAddress}</Text>}
               <Text style={styles.font}>{clientCity} {clientZipcode}</Text>
+            </View>
+            <View style={styles.logo_wrapper}>
+              <Image src={logo} style={styles.logo}/>
             </View>
           </View>
           <View style={styles.invoice_group}>
@@ -177,9 +188,9 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
                 <View style={styles.invoice_items} key={id}>
                   <View style={styles.des__group}>
                     <Text style={[styles.item, { marginBottom: '10', fontSize: '14' }]}>{description}</Text>
-                    <Text style={{fontSize: '10', opacity: 0.7, width: '95%'}}>{details}</Text>
+                    <Text style={{fontSize: '10', opacity: 0.8, width: '95%'}}>{details}</Text>
                   </View>
-                  <Text style={[styles.item, {width: '15%', textAlign: 'center'}]}>{currencySymbol}{rate}</Text>
+                  <Text style={[styles.item, {width: '15%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
                   <Text style={[styles.item, {width: '15%', textAlign: 'center'}]}>{quantity}</Text>
                   <Text style={[styles.item, {width: '15%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
                 </View>
@@ -227,12 +238,6 @@ const PDFView = ({ rows, currencySymbol, formName, logo, email, businessName, ad
   
   return ( 
     <>
-      <div className={styles.preview__wrapper}>
-
-        <h2>Invoice Template Preview</h2>
-        <button onClick={saveInvoice}>Save to PDF</button>
-      </div>
-      
       <PDFViewer className={styles.full}>
         <PDF 
           rows={rows}

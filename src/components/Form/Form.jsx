@@ -3,12 +3,9 @@ import styles from './form.module.scss';
 import Table from '../Table/Table'
 import Image from 'next/image'
 
-import logoP from '../../assets/images/placeholder-image.png';
 import { useEffect } from "react";
 
-const Form = ({ prefill, currencySymbol, rows, onFormMod, onTableUpdate, onRowAdd, onRowRemove }) => {
-  const [logo, setLogo] = useState(logoP);
-  const [logoUpdated, setLogoUpdated] = useState(false);
+const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, onFormMod, onTableUpdate, onRowAdd, onRowRemove }) => {
   const [total, setTotal] = useState(0);
 
   const handleChange = (e) => {
@@ -17,14 +14,6 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onTableUpdate, onRowAd
     const value = e.target.value;
     onFormMod(name, value);
   }
-
-
-  // const handleSubmit = event => {
-  //   event.preventDefault();
-  //   alert('You have submitted the form.');
-  //   console.log('submitted!!!');
-
-  // }
 
   // Table Functions
   const updateTable = (e, id, amount) => {
@@ -41,19 +30,10 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onTableUpdate, onRowAd
   // }
 
   const imageHandler = (e) => {
-    // console.log(e.target.files[0]);
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setLogo(reader.result);
-        setLogoUpdated(true);
-      }
-    }
-    reader.readAsDataURL(e.target.files[0]);
+    updateLogo(e);
   }
 
   useEffect(() => {
-    console.log('effect ' , rows);
     setTotal(calculateTotal());
   }, [rows]);
 
@@ -324,7 +304,7 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onTableUpdate, onRowAd
                 type="text" 
                 name="clientWebsite" 
                 id="clientWebsite" 
-                placeholder="https://example-website.com"
+                placeholder="One week"
                 onChange={handleChange}
                 value={prefill.clientWebsite || ''} 
               />
@@ -354,7 +334,7 @@ const Form = ({ prefill, currencySymbol, rows, onFormMod, onTableUpdate, onRowAd
             id="notes"
             onChange={handleChange}
             value={prefill.notes || ''} 
-            style={{height: '135px', marginTop: '18px', resize: 'none'}}
+            style={{height: '135px', marginTop: '18px', resize: 'none', fontFamily: 'Arial'}}
             placeholder="Notes - any relevant information not covered, additional terms and conditions."
             className={`${styles.input__default} ${styles.details}`}></textarea>
         </div>
