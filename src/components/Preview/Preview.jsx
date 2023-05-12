@@ -1,8 +1,10 @@
 import styles from "./preview.module.scss";
 import { Document, Page, Text, Image, View, StyleSheet, Font, PDFViewer } from '@react-pdf/renderer';
 import { useEffect, useState } from "react";
+import Template2 from "./Template2/Template2";
 
-const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes }) => {
+const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes }) => {
+  const [totalAmount, setTotalAmount] = useState(null);
   
   // Register fonts
 
@@ -23,7 +25,6 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
 
   const styles = StyleSheet.create({
     body: {
-      // backgroundColor: 'lightgray',
       backgroundColor: '#FCFBF8',
       padding: 40,
       paddingTop: 30,
@@ -138,23 +139,26 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
     
   })
 
-  const calculateTotal = () => {
+  const handleTotalCalculation = () => {
     let sum = 0;
     rows.forEach(row => {
       sum += parseFloat(row.amount);
     })
-    return sum.toFixed(2);
+    setTotalAmount(sum.toFixed(2));
   }
+
+  useEffect(() => {
+    handleTotalCalculation();
+  }, [])
 
   return ( 
     <Document
-      author="Lani Juyi"
+      author={owner}
       keywords="invoice, receipt"
       subject={`${businessName} Invoice`}
       title="Invoice"
     >
-      <Page size="A4" style={styles.body}>
-        
+      {template === 'template1' && <Page size="A4" style={styles.body}>
         <View style={{display: 'flex', justifyContent: 'center'}}>
           <View style={styles.section}>
             <View style={styles.header_details}>
@@ -209,7 +213,7 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
               </View> */}
               {/* <View style={styles.total}> */}
                 <Text style={styles.table_header}>TOTAL</Text>
-                <Text style={styles.total_amount}>{currencySymbol}{calculateTotal()}</Text>
+                <Text style={styles.total_amount}>{currencySymbol}{totalAmount}</Text>
               {/* </View> */}
             </View>
             <Text style={styles.notes}>{notes}</Text>
@@ -219,16 +223,40 @@ const PDF = ({ rows, currencySymbol, formName, logo, email, businessName, addres
             </View>
           </View>
         </View>
-      </Page>
+      </Page>}
+      {template === 'template2' && 
+        <Template2 
+          logo={logo}
+          formName={formName}
+          businessName={businessName}
+          InvoiceNo={InvoiceNo}
+          date={date}
+          clientName={clientName}
+          clientAddress={clientAddress}
+          clientCity={clientCity}
+          clientZipcode={clientZipcode}
+          clientPhone={clientPhone}
+          rows={rows}
+          currencySymbol={currencySymbol}
+          totalAmount={totalAmount}
+          notes={notes}
+          owner={owner}
+          address={address}
+          city={city}
+          zipcode={zipcode}
+        /> 
+      }
+
     </Document>
    );
 }
 
-const PDFView = ({ rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes }) => {
+const PDFView = ({ template, rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes }) => {
+  
 
-  const saveInvoice = () => {
-    console.log('saved');
-  }
+  // const saveInvoice = () => {
+  //   console.log('saved');
+  // }
 
   const [client, setClient] = useState(false);
 
@@ -240,6 +268,7 @@ const PDFView = ({ rows, currencySymbol, formName, logo, email, businessName, ad
     <>
       <PDFViewer className={styles.full}>
         <PDF 
+          template={template}
           rows={rows}
           email={email} 
           businessName={businessName}
