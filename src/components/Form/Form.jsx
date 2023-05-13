@@ -297,18 +297,18 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
                 value={prefill.date || ''} 
               />
             </div>
-            <div className={styles.form__field}>
-              <label htmlFor="clientWebsite" className={styles.label}>Terms</label>
+            {/* <div className={styles.form__field}>
+              <label htmlFor="terms" className={styles.label}>Terms</label>
               <input
                 className={styles.input__default}
                 type="text" 
-                name="clientWebsite" 
-                id="clientWebsite" 
+                name="terms" 
+                id="terms" 
                 placeholder="One week"
                 onChange={handleChange}
-                value={prefill.clientWebsite || ''} 
+                value={prefill.terms || ''} 
               />
-            </div>
+            </div> */}
           </div>
         </div>
 
