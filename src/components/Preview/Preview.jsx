@@ -1,9 +1,10 @@
 import styles from "./preview.module.scss";
 import { Document, Page, Text, Image, View, StyleSheet, Font, PDFViewer } from '@react-pdf/renderer';
 import { useEffect, useState } from "react";
-import Template2 from "./Template2/Template2";
+import Template2 from "./Templates/Template2";
+import Template3 from "./Templates/Template3";
 
-const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes }) => {
+const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes }) => {
   const [totalAmount, setTotalAmount] = useState(null);
   
   // Register fonts
@@ -232,6 +233,7 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessNa
           InvoiceNo={InvoiceNo}
           date={date}
           clientName={clientName}
+          clientEmail={clientEmail}
           clientAddress={clientAddress}
           clientCity={clientCity}
           clientZipcode={clientZipcode}
@@ -244,6 +246,33 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessNa
           address={address}
           city={city}
           zipcode={zipcode}
+          website={website}
+        /> 
+      }
+      {template === 'template3' && 
+        <Template3 
+          logo={logo}
+          formName={formName}
+          businessName={businessName}
+          InvoiceNo={InvoiceNo}
+          date={date}
+          clientName={clientName}
+          clientEmail={clientEmail}
+          clientAddress={clientAddress}
+          clientCity={clientCity}
+          clientZipcode={clientZipcode}
+          clientPhone={clientPhone}
+          rows={rows}
+          currencySymbol={currencySymbol}
+          totalAmount={totalAmount}
+          notes={notes}
+          owner={owner}
+          address={address}
+          city={city}
+          zipcode={zipcode}
+          email={email}
+          phone={phone}
+          website={website}
         /> 
       }
 
@@ -251,7 +280,7 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessNa
    );
 }
 
-const PDFView = ({ template, rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, clientWebsite, notes }) => {
+const PDFView = ({ template, rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes }) => {
   
 
   // const saveInvoice = () => {
@@ -287,7 +316,7 @@ const PDFView = ({ template, rows, currencySymbol, formName, logo, email, busine
           clientPhone={clientPhone}
           date={date}
           InvoiceNo={InvoiceNo}
-          clientWebsite={clientWebsite}
+          website={website}
           notes={notes}
           currencySymbol={currencySymbol}
           >
