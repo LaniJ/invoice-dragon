@@ -3,6 +3,7 @@ import { Document, Page, Text, Image, View, StyleSheet, Font, PDFViewer } from '
 import { useEffect, useState } from "react";
 import Template2 from "./Templates/Template2";
 import Template3 from "./Templates/Template3";
+import Template4 from "./Templates/Template4";
 
 const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes }) => {
   const [totalAmount, setTotalAmount] = useState(null);
@@ -271,6 +272,31 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessNa
           city={city}
           zipcode={zipcode}
           email={email}
+          phone={phone}
+          website={website}
+        /> 
+      }
+      {template === 'template4' && 
+        <Template4 
+          logo={logo}
+          formName={formName}
+          businessName={businessName}
+          InvoiceNo={InvoiceNo}
+          date={date}
+          clientName={clientName}
+          clientEmail={clientEmail}
+          clientAddress={clientAddress}
+          clientCity={clientCity}
+          clientZipcode={clientZipcode}
+          clientPhone={clientPhone}
+          rows={rows}
+          currencySymbol={currencySymbol}
+          totalAmount={totalAmount}
+          notes={notes}
+          owner={owner}
+          address={address}
+          city={city}
+          zipcode={zipcode}
           phone={phone}
           website={website}
         /> 
