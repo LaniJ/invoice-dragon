@@ -9,6 +9,7 @@ import Previewed from "../components/Preview/Preview";
 import { useState } from 'react';
 import Dropdown from '../components/Dropdown/Dropdown';
 import logoP from '../assets/images/placeholder-image.png';
+import HomePage from '../components/Home/HomePage';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -88,6 +89,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <HomePage />
         <div className={styles.container}>
           <div className={styles.header}>
             <h1>Create your  
