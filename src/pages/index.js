@@ -21,6 +21,7 @@ export default function Home() {
   const [currencySymbol, setCurrencySymbol] = useState('$');
   const [logo, setLogo] = useState(logoP);
   const [logoUpdated, setLogoUpdated] = useState(false);
+  const [template, setTemplate] = useState(null);
 
   const handleChange = (e) => {
     setService(e.target.value);
@@ -74,6 +75,10 @@ export default function Home() {
     reader.readAsDataURL(e.target.files[0]);
   }
 
+  const handleTemplateChange = (e) => {
+    setTemplate(e.target.value);
+  }
+
   return (
     <>
       <Head>
@@ -109,7 +114,9 @@ export default function Home() {
               </select>
             </div>
           </div>
-          <InvoiceTemplate service={service}/>
+          <InvoiceTemplate
+            changeTemplate={handleTemplateChange}
+          />
           <div className={styles.template__section}>
             <div className={styles.main__section}>
               {!showPreview && <Form
@@ -130,6 +137,7 @@ export default function Home() {
                 {...formData}
                 rows={rows}
                 logo={logo}
+                template={template}
                 currencySymbol={currencySymbol}
                 onPreviewToggle={handleToggle}
               />}
@@ -155,80 +163,9 @@ export default function Home() {
               />
             </div>
           </div>
-            {/* <option
-              value={currency.code}
-              key={currency.code}
-            >
-              <span>{currency.code} -</span>
-              <span>{currency.symbol}</span>
-              <span>
-              </span>
-            </option> */}
-          {/* <form>
-            <label htmlFor="opt1">
-              <input type="radio" name="tester" id='opt1' />
-              Check
-            </label>
-            <label htmlFor="opt2">
-              <input type="radio"  name="tester" id='opt2'/>
-              Check222
-            </label>
-          </form> */}
-
-          {/* <div>
-            <h3>Select Template</h3>
-            <div>
-              <div>
-                <h2>Image 1</h2>
-              </div>
-              <div>
-                <h2>Image 2</h2>
-              </div>
-              <div>
-                <h2>Image 3</h2>
-              </div>
-            </div>
-          </div> */}
-
-
-          {/* ------- */}
-          {/* <Image
-          className={styles.enlarge}
-          src={InvoiceTemp1}
-          alt="Next.js Logo"
-          priority
-        /> */}
-        {/* <Image
-          className={styles.enlarge}
-          src={InvoiceTemp3}
-          alt="Next.js Logo"
-          priority
-        />
-        <Image
-          className={styles.enlarge}
-          src={InvoiceTemp2}
-          alt="Next.js Logo"
-          priority
-        /> */}
-
-        {/* ------- */}
-
-         {/* <form action="">
-        <p>A simple mod:</p>
-        <div className="cc-selector-2">
-            <input id="visa2" type="radio" name="creditcard" value="visa" />
-            <label className="drinkcard-cc visa" htmlFor="visa2"></label>
-            <input  defaultChecked id="mastercard2" type="radio" name="creditcard" value="mastercard" />
-            <label className="drinkcard-cc mastercard"htmlFor="mastercard2"></label>
         </div>
-      </form> */}
-
-      {/* ------- */}
-
-      {/* <img class={styles.enlarge} src="https://upload.wikimedia.org/wikipedia/commons/6/6f/OrteliusWorldMap.jpeg" alt="test" />
-        <img class={styles.enlarge} src="https://upload.wikimedia.org/wikipedia/commons/6/6f/OrteliusWorldMap.jpeg" alt="test" /> */}
-        {/* <img class={styles.enlarge} src="https://upload.wikimedia.org/wikipedia/commons/6/6f/OrteliusWorldMap.jpeg" alt="test" /> */}
-        </div>
+        {/* service={service} */}
+        {/* template={template} */}
       </main>
     </>
   )
