@@ -1,14 +1,18 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  font-size: 24px;
-}
+// .header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 20px 40px;
+//   font-size: 24px;
+// }
+
+// .pageLogo {
+//   cursor: pointer;
+// }
 
 .wrapper {
-  // background-color: #1e87f0;
-  height: 100vh;
+  background-color: #1e87f0;
+  // height: 100vh;
   color: #FFFFFF;
   background: 50% 17vh no-repeat,linear-gradient(to left top,#28a5f5,#1e87f0) 0 0 no-repeat;
 
@@ -33,14 +37,14 @@
   display: flex;
 
   .btn {
-    padding: 0 40px;
+    padding: 0 80px;
     line-height: 53px;
     font-size: 14px;
     border-radius: 30px;
     cursor: pointer;
     outline: none;
     border: 1px solid transparent;
-    margin-right: 20px;
+    // margin-right: 20px;
     line-height: 48px;
     transition: .1s ease-in-out;
     transition-property: color,background-color,border-color;
