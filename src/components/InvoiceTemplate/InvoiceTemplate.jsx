@@ -20,9 +20,6 @@ const InvoiceTemplate = ({ service, template, changeTemplate }) => {
     <div className={styles.section}>
       <h2>Choose a Template</h2>
        
-      <hr />
-      <br /><br />
-
       <div className={styles.grid__wrapper}>
         {/* option 1 */}
         <div className={styles.template}>
