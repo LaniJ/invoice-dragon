@@ -26,13 +26,12 @@ const Templates = () => {
     setTemplate(e.target.value);
     if (e.target.value) setTemplateSelected(true);
 
-
-  setTimeout(() => {
-    window.scroll({
-      top: 500,
-      behavior: "smooth",
-    });
-  }, 400)
+    setTimeout(() => {
+      window.scroll({
+        top: 500,
+        behavior: "smooth",
+      });
+    }, 400)
 
   }
 
@@ -118,24 +117,19 @@ const Templates = () => {
             />}
           </div>
           <div className={styles.action__section}>
-            <div>
+            <div className={styles.actions}>
               ACTIONS
               <br />
               <br />
               <button className={styles.action__btn} onClick={handleToggle}>Preview Invoice</button>
-              <button className={styles.action__btn}>Print</button>
-              <button className={styles.action__btn}>Email</button>
+              <br />
+              <br />
+              <Dropdown
+                currencyCode={currencyCode}
+                currencySymbol={currencySymbol}
+                onCurrencyModify={handleCurrencyModify}
+              />
             </div>
-            <br />
-            <br />
-            <label htmlFor="currency-select">CURRENCY</label>
-            <br />
-            <br />
-            <Dropdown
-              currencyCode={currencyCode}
-              currencySymbol={currencySymbol}
-              onCurrencyModify={handleCurrencyModify}
-            />
           </div>
         </div>}
       </div>
