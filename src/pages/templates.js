@@ -12,7 +12,7 @@ const Templates = () => {
   // const [service, setService] = useState('invoice');
 
   const [showPreview, setShowPreview] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({formName: 'Invoice'});
   const [rows, setRows] = useState(Array(1).fill({id: 0, quantity: 1, amount: '0.00'}));
   const [logo, setLogo] = useState(logoP);
   const [logoUpdated, setLogoUpdated] = useState(false);
