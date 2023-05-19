@@ -3,6 +3,7 @@ import InvoiceTemplate from "../components/InvoiceTemplate/InvoiceTemplate";
 import Dropdown from '../components/Dropdown/Dropdown';
 import styles from '@/styles/Home.module.scss';
 import Form from "../components/Form/Form";
+import Header from '@/components/Header/Header';
 import logoP from '../assets/images/placeholder-image.png';
 import Previewed from "../components/Preview/Preview";
 
@@ -85,9 +86,10 @@ const Templates = () => {
 
   return ( 
     <div className={styles.template__wrapper}>
+      <div className={styles.header}>
+        <Header />
+      </div>
       <div className={styles.container}>
-        <div className={styles.header}>
-        </div>
         <InvoiceTemplate
           changeTemplate={handleTemplateChange}
         />

@@ -5,7 +5,10 @@
   padding: 20px 40px;
   font-size: 24px;
   color: #FFFFFF;
-  background: linear-gradient(to left,#28a5f5,#1e87f0);
+
+  @media screen and (max-width: 768px) {
+    padding: 20px 20px;
+  }
 }
 
 .pageLogo {
