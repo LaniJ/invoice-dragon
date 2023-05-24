@@ -3,6 +3,10 @@
   position: relative;
   user-select: none;
 
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
   &__btn {
     color: #333;
     font-weight: bold;

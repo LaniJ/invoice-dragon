@@ -10,6 +10,10 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
+
+  @media screen and (max-width: 768px) {
+   padding: 20px;
+  }
 }
 
 .header h1 {
@@ -27,6 +31,10 @@
 .template__section {
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 
   .main__section {
     flex-grow: 1;
@@ -60,6 +68,10 @@
     position: sticky;
     top: 100px;
     // min-height: fit-content;
+
+    @media screen and (max-width: 768px) {
+      margin-top: 30px;
+    }
   }
 }
 

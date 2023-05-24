@@ -1,9 +1,11 @@
 import { useRef } from 'react';
 import React from 'react';
 import styles from '../Form/form.module.scss';
+import { useMediaQuery } from 'react-responsive';
 
 const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow, onFormSubmit }) => {
-
+  
+  const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
   const rateRef = useRef([]);
   const quantityRef = useRef([]);
 
@@ -15,7 +17,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
   const tableRows = rows.map((item, index) => { 
     return (
       <React.Fragment key={item.id}>
-        <tr className={styles.item__row}>
+        {!isMobile && <tr className={styles.item__row}>
           <td className={styles.item__row__actions}>
             <div className={styles.confirm__delete__button}>
               <button
@@ -84,7 +86,83 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
             <span>{calculateAmount(item.rate, item.quantity, item.id)}</span>
           </td>
           {/* <td className={styles.tax}>Tax</td> */}
-        </tr>
+        </tr>}
+
+        {isMobile && <div className={styles.item__row}>
+          
+          <div className={styles.description}>
+            <input 
+              className={styles.input__default}
+              type="text" 
+              name="description" 
+              id={`description__${item.id}`}
+              key={`des-input_${item.id}`}
+              placeholder="Item Description"
+              maxLength={20}
+              onChange={(e) => handleChange(e, item)}
+              value={item.description || ''} 
+            />
+            <textarea
+              name="details" 
+              id={`details__${item.id}`}
+              key={`details-input_${item.id}`}
+              placeholder="Additional details"
+              className={`${styles.input__default} ${styles.mobile__details}`}
+              onChange={(e) => handleChange(e, item)}
+              value={item.details || ''} 
+              ></textarea>
+          </div>
+          <div className={styles.input__group}>
+            <div className={styles.rate}>
+              <input 
+                className={styles.input__default}
+                type="number" 
+                name="rate" 
+                id={`rate__${item.id}`} 
+                ref={el => rateRef.current[index] = el}
+                placeholder="price"
+                maxLength={20}
+                key={`rate-input_${item.id}`}
+                onChange={(e) => handleChange(e, item, index)}
+                value={item.rate || ''} 
+              />
+            </div>
+            <div className={styles.qty}>
+              <input 
+                className={styles.input__default}
+                type="number" 
+                name="quantity" 
+                id={`quantity__${item.id}`} 
+                ref={el => quantityRef.current[index] = el}
+                placeholder="0"
+                maxLength={15}
+                key={`qty-input_${item.id}`}
+                onChange={(e) => handleChange(e, item, index)}
+                value={item.quantity || ''} 
+              />
+            </div>
+          </div>
+          
+          {/* <div className={styles.tax}>Tax</div> */}
+          <div className={styles.item__row__actions__mobile}>
+            <div className={styles.confirm__delete__button}>
+              <button
+                type='button'
+                title="Remove Item"
+                className={styles.btn__remove}
+                onClick={() => handleRemove(item.id)}>
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" className={styles.svg__close__icon} role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
+                </svg>
+                <span className={styles.btn__text}>Delete</span>
+              </button>
+              
+            </div>
+            <div className={styles.amount}>
+              <span>{currencySymbol} </span>
+              <span>{calculateAmount(item.rate, item.quantity, item.id)}</span>
+            </div>
+          </div>
+        </div>}
       </React.Fragment >
     )
   })
@@ -110,9 +188,8 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
   }
 
   return ( 
-    <div>
-      {/* <>{tableRows}</> */}
-      <table className={styles.table}>
+    <div className={styles.table__wrapper}>
+      {!isMobile && <table className={styles.table}>
         <thead>
           <tr className={styles.invoice__headers}>
             <th className={styles.controls}>&nbsp;</th>
@@ -136,7 +213,16 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
             </td>
           </tr>
         </tbody>
-      </table>
+      </table>}
+      {isMobile && <div className={styles.mobile__section}>
+        <>{tableRows}</>
+        <button
+          type='button'
+          onClick={handleClick}
+          className={`${styles.add__invoice__item} ${styles.btn__add}`}>
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+        </button>
+      </div>}
     </div>
    );
 }

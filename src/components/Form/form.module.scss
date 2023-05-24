@@ -4,11 +4,19 @@
   max-width: 810px;
   border-radius: 8px;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -4px rgb(0 0 0 / 10%);
+
+  @media screen and (max-width: 768px) {
+    padding: 20px;
+  }
 }
 .header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 60px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 
   .invoice__title {
     font-size: 2rem;
@@ -16,6 +24,10 @@
   .input__default {
     width: 48%;
     max-height: 45px;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   .photo__drop__zone {
@@ -27,6 +39,11 @@
     border-radius: 3px;
     border: none;
     cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      display: block;
+      margin-top: 15px;
+    }
   }
   .logo__input {
     display: none;
@@ -66,6 +83,11 @@
   display: grid;
   grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 2.25rem;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .biz__section,
@@ -79,8 +101,10 @@
   outline: none;
   border: 1px solid #aaa;
   width: 100%;
-  // margin-left: 10px;
-  padding: 8px 16px;
+  padding: 10px 16px;
+  @media screen and (max-width: 768px) {
+    margin-bottom: 8px;
+  }
 }
 
 .form__field {
@@ -108,13 +132,20 @@
   display: grid;
   grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 2.25rem;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .group {
   flex: 0 0 50%;
 }
 
-// table
+.table__wrapper {
+  overflow-x: auto;
+}
 
 .table {
   border-collapse: collapse;
@@ -169,6 +200,12 @@
     
     &__actions {
       color: aquamarine;
+
+      &__mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
 
     .rate {
@@ -193,6 +230,10 @@
         min-height: 63px;
         max-height: 150px;
         font-family: 'Arial';
+        
+        @media screen and (max-width: 768px) {
+          min-height: 125px;
+        }
       }
     }
 
@@ -243,5 +284,48 @@
 
   .total {
     padding-left: 90px;
+  }
+}
+// mobile //
+
+
+.mobile__section {
+  margin-top: 30px;
+}
+.input__group {
+  display: flex;
+  justify-content: space-between;
+
+  .input__default {
+    width: 90%;
+    }
+
+    .qty {
+      justify-content: flex-end;
+      display: flex;
+    }
+}
+
+.mobile__details {
+  resize: vertical;
+  min-height: 100px;
+  font-family: 'Arial';
+}
+.btn__text {
+  margin-left: 4px;
+}
+
+.item__row {
+  cursor: pointer;
+  transition: transform .5s ease-out, -webkit-transform .5s ease-out;
+  
+  &__actions {
+
+    &__mobile {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
   }
 }

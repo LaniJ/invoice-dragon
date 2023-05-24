@@ -43,7 +43,11 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessNa
       alignItems: 'center',
       padding: 10,
       flexGrow: 1,
-      borderBottom: '0.5px solid #000000'
+      borderBottom: '0.5px solid #000000',
+
+      '@media max-width: 400': {
+        width: 300,
+      },
     },
     logo_wrapper: {
       width: '150',

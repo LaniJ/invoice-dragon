@@ -1,10 +1,18 @@
 .section {
   margin: 40px 0;
   font-size: 24px;
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+  }
 }
 .section {
   h2 {
     margin-bottom: 30px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 30px;
+    }
   }
 
   &__templates {
@@ -20,9 +28,15 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 380px;
   background-color: #2196F3;
-
   gap: 15px;
   padding: 10px;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: unset;
+    background-color: unset;
+  }
 
   .template {
     width: 100%;

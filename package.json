@@ -14,6 +14,7 @@
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-responsive": "^9.0.2",
     "typewriter-effect": "^2.19.0"
   },
   "devDependencies": {

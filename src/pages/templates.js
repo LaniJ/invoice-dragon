@@ -23,7 +23,6 @@ const Templates = () => {
   const [templateSelected, setTemplateSelected] = useState(false);
 
   const handleTemplateChange = (e) => {
-    console.log('tem', e.target.value);
     setTemplate(e.target.value);
     if (e.target.value) setTemplateSelected(true);
 
