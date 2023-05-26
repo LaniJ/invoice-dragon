@@ -122,7 +122,7 @@ const Templates = () => {
               ACTIONS
               <br />
               <br />
-              <button className={styles.action__btn} onClick={handleToggle}>Preview Invoice</button>
+              <button className={styles.action__btn} onClick={handleToggle}>{showPreview ? 'Back to Edit' : 'Preview Invoice'}</button>
               <br />
               <br />
               <Dropdown
