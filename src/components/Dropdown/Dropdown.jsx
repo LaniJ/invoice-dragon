@@ -7,7 +7,6 @@ const Dropdown = ({ currencyCode, currencySymbol, onCurrencyModify }) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = (currency) => {
-    console.log('currency', currency)
     onCurrencyModify(currency)
     setIsActive(false);
   }
