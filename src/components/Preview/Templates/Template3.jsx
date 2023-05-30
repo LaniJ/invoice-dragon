@@ -234,9 +234,9 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
                 <Text style={{ marginBottom: '10' }}>{description}</Text>
                 <Text style={{fontSize: '10', opacity: 0.8, width: '95%', minWidth: '80%'}}>{details}</Text>
               </View>
-              <Text style={[styles.col__colour1, {minWidth: '15%', textAlign: 'center'}]}>{quantity}</Text>
-              <Text style={[styles.col__colour2, {minWidth: '15%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
-              <Text style={[styles.col__colour2, {minWidth: '15%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
+              <Text style={[styles.col__colour1, {width: '15%', textAlign: 'center'}]}>{quantity}</Text>
+              <Text style={[styles.col__colour2, {width: '15%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
+              <Text style={[styles.col__colour2, {width: '15%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
             </View>
           ))}
           <View style={styles.total__section__wrapper}>
