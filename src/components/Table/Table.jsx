@@ -38,7 +38,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               id={`description__${item.id}`}
               key={`des-input_${item.id}`}
               placeholder="Item Description"
-              maxLength={20}
+              maxLength={30}
               onChange={(e) => handleChange(e, item)}
               value={item.description || ''} 
             />
