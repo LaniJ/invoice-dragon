@@ -239,7 +239,7 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
         <View style={styles.note__section}>
           <Text>{notes}</Text>
         </View>
-        <View style={styles.footer__section}>
+        <View wrap={false} style={styles.footer__section}>
           <View style={styles.sender__info}>
             <Text>____________________________</Text>
             <Text style={styles.owner}>{owner}</Text>

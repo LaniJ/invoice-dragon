@@ -17,13 +17,19 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
     src: "/assets/Garet-Heavy.ttf",
   });
 
+  Font.register({
+    family: 'Quicksand',
+    src: "/assets/Quicksand-Medium.ttf",
+  });
+
   const styles = StyleSheet.create({
     body: {
       backgroundColor: '#FCFBF8',
       padding: 40,
       paddingTop: 30,
       color:'#4C3D3D',
-      fontFamily: 'Garet'
+      fontFamily: 'Garet',
+      // fontFamily: 'Quicksand',
     },
     invoice_group: {
       flexGrow: 1
@@ -195,7 +201,7 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
             {/* </View> */}
           </View>
           <Text style={styles.notes}>{notes}</Text>
-          <View style={styles.footer}>
+          <View wrap={false} style={styles.footer}>
             <Text style={styles.item}>{owner}</Text>
             <Text style={styles.item}>____________________________</Text>
           </View>
