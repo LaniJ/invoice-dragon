@@ -242,6 +242,11 @@
     .amount {
       min-width: 120px
     }
+
+    .amount {
+      max-width: 120px;
+      word-wrap: break-word;
+    }
   }
 }
 .invoice__headers {
