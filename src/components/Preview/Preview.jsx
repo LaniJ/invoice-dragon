@@ -14,7 +14,11 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessNa
     rows.forEach(row => {
       sum += parseFloat(row.amount);
     })
-    setTotalAmount(sum.toFixed(2));
+    setTotalAmount(numberWithCommas(sum.toFixed(2)))
+  }
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   useEffect(() => {
