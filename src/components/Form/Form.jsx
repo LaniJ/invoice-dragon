@@ -185,7 +185,7 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
               />
             </div>
             <div className={styles.form__field}>
-              <label htmlFor="owner" className={styles.label}>Owner</label>
+              <label htmlFor="owner" className={styles.label}>Sender's Name</label>
               <input
                 className={styles.input__default}
                 type="text" 
