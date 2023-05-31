@@ -8,7 +8,7 @@ const Header = () => {
   return (  
     <div className={styles.header}>
       <div>
-        <Link className={styles.pageLogo} href="http://localhost:3000/" passHref={true}>
+        <Link className={styles.pageLogo} href="/" passHref={true}>
           <Image
             src={logo}
             alt="Page Logo"
