@@ -218,6 +218,7 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
                 {city && <Text style={styles.item}>, {city}</Text>}
                 {zipcode && <Text style={styles.item}>, {zipcode}</Text>}
               </View>
+              <Text style={styles.item}>{website}</Text>
             </View>
             <Text style={styles.item}>____________________________</Text>
           </View>

@@ -1,5 +1,5 @@
 import styles from "./preview.module.scss";
-import { Document, Page, Text, Image, View, StyleSheet, Font, PDFViewer } from '@react-pdf/renderer';
+import { Document, PDFViewer } from '@react-pdf/renderer';
 import { useEffect, useState } from "react";
 import Template1 from "./Templates/Template1";
 import Template2 from "./Templates/Template2";
