@@ -48,8 +48,8 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       },
     },
     logo_wrapper: {
-      width: '150',
-      height: '150',
+      width: '100',
+      height: '100',
       marginTop: 30,
     },
     logo: {
@@ -57,7 +57,7 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       height: '100%',
     },
     header_details: {
-      paddingRight: '25'
+      paddingRight: '20'
     },
     formName: {
       fontSize: '40px',
@@ -138,6 +138,10 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       flexDirection: 'row',
       justifyContent: 'space-between',
       marginTop: 50,
+    },
+    address__group: {
+      display: 'flex',
+      flexDirection: 'row'
     }
   })
  
@@ -156,8 +160,13 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
 
             <Text style={styles.font}>Billed To:</Text>
             {clientName && <Text style={styles.font}>{clientName}</Text>}
-            {clientAddress && <Text style={styles.font}>{clientAddress}</Text>}
-            <Text style={styles.font}>{clientCity} {clientZipcode}</Text>
+            {clientPhone && <Text style={styles.font}>{clientPhone}</Text>}
+            {clientEmail && <Text style={styles.font}>{clientEmail}</Text>}
+            <View style={styles.address__group}>
+              {clientAddress && <Text style={styles.font}>{clientAddress}</Text>}
+              {clientCity && <Text style={styles.font}>, {clientCity}</Text>}
+              {clientZipcode && <Text style={styles.font}>, {clientZipcode}</Text>}
+            </View>
           </View>
           <View style={styles.logo_wrapper}>
             <Image src={logo} style={styles.logo}/>
@@ -202,7 +211,14 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
           </View>
           <Text style={styles.notes}>{notes}</Text>
           <View wrap={false} style={styles.footer}>
-            <Text style={styles.item}>{owner}</Text>
+            <View>
+              <Text style={styles.item}>{owner}</Text>
+              <View style={styles.address__group}>
+                {address && <Text style={styles.item}>{address}</Text>}
+                {city && <Text style={styles.item}>, {city}</Text>}
+                {zipcode && <Text style={styles.item}>, {zipcode}</Text>}
+              </View>
+            </View>
             <Text style={styles.item}>____________________________</Text>
           </View>
         </View>
