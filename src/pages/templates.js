@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+
 import InvoiceTemplate from "../components/InvoiceTemplate/InvoiceTemplate";
 import Dropdown from '../components/Dropdown/Dropdown';
 import styles from '@/styles/Home.module.scss';
@@ -22,13 +24,15 @@ const Templates = () => {
   const [template, setTemplate] = useState(null);
   const [templateSelected, setTemplateSelected] = useState(false);
 
+  const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
+
   const handleTemplateChange = (e) => {
     setTemplate(e.target.value);
     if (e.target.value) setTemplateSelected(true);
 
     setTimeout(() => {
       window.scroll({
-        top: 500,
+        top: isMobile? 1800 : 500,
         behavior: "smooth",
       });
     }, 400)
