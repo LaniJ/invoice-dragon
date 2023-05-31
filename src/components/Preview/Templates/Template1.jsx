@@ -124,7 +124,7 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       marginRight: '30'
     },
     des__group: {
-      width: '55%',
+      width: '40%',
       textAlign: 'left',
     },
     notes: {
@@ -166,10 +166,10 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
         <View style={styles.invoice_group}>
           <View style={styles.invoice_body}>
             <View style={styles.invoice_header}>
-              <Text style={[styles.table_header, {width: '55%'}]}>DESCRIPTION</Text>
-              <Text style={[styles.table_header, {width: '15%', textAlign: 'center'}]}>PRICE</Text>
-              <Text style={[styles.table_header, {width: '15%', textAlign: 'center'}]}>QTY</Text>
-              <Text style={[styles.table_header, {width: '15%', textAlign: 'right'}]}>AMOUNT</Text>
+              <Text style={[styles.table_header, {width: '40%'}]}>DESCRIPTION</Text>
+              <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>PRICE</Text>
+              <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>QTY</Text>
+              <Text style={[styles.table_header, {width: '20%', textAlign: 'right'}]}>AMOUNT</Text>
             </View>
 
             {rows.map(({ id, description, details, rate, quantity, amount }) => (
@@ -178,9 +178,9 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
                   <Text style={[styles.item, { marginBottom: '10', fontSize: '14' }]}>{description}</Text>
                   <Text style={{fontSize: '10', opacity: 0.8, width: '95%'}}>{details}</Text>
                 </View>
-                <Text style={[styles.item, {width: '15%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
-                <Text style={[styles.item, {width: '15%', textAlign: 'center'}]}>{quantity}</Text>
-                <Text style={[styles.item, {width: '15%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
+                <Text style={[styles.item, {width: '20%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
+                <Text style={[styles.item, {width: '20%', textAlign: 'center'}]}>{quantity}</Text>
+                <Text style={[styles.item, {width: '20%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
               </View>
             ))}
           </View>

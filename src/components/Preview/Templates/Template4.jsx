@@ -105,7 +105,7 @@ const Template2 = ({totalAmount, rows, phone, logo, notes, currencySymbol, formN
       padding: '15px 7px 15px 7px',
     },
     des__group: {
-      width: '55%',
+      width: '40%',
       textAlign: 'left',
     },
     total__section: {
@@ -193,10 +193,10 @@ const Template2 = ({totalAmount, rows, phone, logo, notes, currencySymbol, formN
         </View>
         <View style={styles.invoice__details__section}>
           <View style={styles.invoice_header}>
-            <Text style={{width: '55%'}}>DESCRIPTION</Text>
-            <Text style={{width: '15%', textAlign: 'center'}}>QTY</Text>
-            <Text style={{width: '15%', textAlign: 'center'}}>PRICE</Text>
-            <Text style={{width: '15%', textAlign: 'right'}}>TOTAL</Text>
+            <Text style={{width: '40%'}}>DESCRIPTION</Text>
+            <Text style={{width: '20%', textAlign: 'center'}}>QTY</Text>
+            <Text style={{width: '20%', textAlign: 'center'}}>PRICE</Text>
+            <Text style={{width: '20%', textAlign: 'right'}}>TOTAL</Text>
           </View>
           {rows.map(({ id, description, details, rate, quantity, amount }) => (
             <View style={styles.invoice_item} key={id}>
@@ -204,9 +204,9 @@ const Template2 = ({totalAmount, rows, phone, logo, notes, currencySymbol, formN
                 <Text style={{ marginBottom: '10' }}>{description}</Text>
                 <Text style={{fontSize: '10', opacity: 0.8, width: '95%'}}>{details}</Text>
               </View>
-              <Text style={{width: '15%', textAlign: 'center'}}>{quantity}</Text>
-              <Text style={{width: '15%', textAlign: 'center'}}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
-              <Text style={{width: '15%', textAlign: 'right'}}>{currencySymbol}{amount}</Text>
+              <Text style={{width: '20%', textAlign: 'center'}}>{quantity}</Text>
+              <Text style={{width: '20%', textAlign: 'center'}}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
+              <Text style={{width: '20%', textAlign: 'right'}}>{currencySymbol}{amount}</Text>
             </View>
           ))}
             <View style={styles.total__section}>

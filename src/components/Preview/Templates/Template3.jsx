@@ -114,7 +114,7 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
       padding: '15px 7px 15px 7px',
     },
     des__group: {
-      width: '55%',
+      width: '40%',
       textAlign: 'left',
       backgroundColor: '#e4e4e4',
       padding: '15px 7px 15px 7px',
@@ -223,10 +223,10 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
         </View>
         <View style={styles.invoice__details__section}>
           <View style={styles.invoice_header}>
-            <Text style={{width: '55%'}}>Item</Text>
-            <Text style={{width: '15%', textAlign: 'center'}}>Quantity</Text>
-            <Text style={{width: '15%', textAlign: 'center'}}>Price</Text>
-            <Text style={{width: '15%', textAlign: 'right'}}>Total</Text>
+            <Text style={{width: '40%'}}>Item</Text>
+            <Text style={{width: '20%', textAlign: 'center'}}>Quantity</Text>
+            <Text style={{width: '20%', textAlign: 'center'}}>Price</Text>
+            <Text style={{width: '20%', textAlign: 'right'}}>Total</Text>
           </View>
           {rows.map(({ id, description, details, rate, quantity, amount }) => (
             <View style={styles.invoice_item} key={id}>
@@ -234,9 +234,9 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
                 <Text style={{ marginBottom: '10' }}>{description}</Text>
                 <Text style={{fontSize: '10', opacity: 0.8, width: '95%', minWidth: '80%'}}>{details}</Text>
               </View>
-              <Text style={[styles.col__colour1, {width: '15%', textAlign: 'center'}]}>{quantity}</Text>
-              <Text style={[styles.col__colour2, {width: '15%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
-              <Text style={[styles.col__colour2, {width: '15%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
+              <Text style={[styles.col__colour1, {width: '20%', textAlign: 'center'}]}>{quantity}</Text>
+              <Text style={[styles.col__colour2, {width: '20%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
+              <Text style={[styles.col__colour2, {width: '20%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
             </View>
           ))}
           <View style={styles.total__section__wrapper}>
