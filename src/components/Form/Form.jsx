@@ -3,10 +3,11 @@ import styles from './form.module.scss';
 import Table from '../Table/Table'
 import Image from 'next/image'
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, onFormMod, onTableUpdate, onRowAdd, onRowRemove }) => {
   const [total, setTotal] = useState(0);
+  const imageRef = useRef(null);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -28,6 +29,10 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
   // const getExtraProps = (name) => {
   //   return isFirstTime ? {value :  prefill[name] } : {}
   // }
+
+  const changeImage = () => {
+    imageRef.current.click();
+  }
 
   const imageHandler = (e) => {
     updateLogo(e);
@@ -68,9 +73,10 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
               name="logo" 
               id="logo" 
               placeholder="Logo"
+              ref={imageRef}
               onChange={imageHandler}
             />
-            <div className={styles.img__holder}>
+            <div className={styles.img__holder} onClick={changeImage}>
               
               {logo && <Image
                 src={logo}

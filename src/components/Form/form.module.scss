@@ -39,6 +39,7 @@
     border-radius: 3px;
     border: none;
     cursor: pointer;
+    position: relative;
 
     @media screen and (max-width: 768px) {
       display: block;
@@ -53,7 +54,7 @@
 .img__holder {
   width: 150px;
   height: 150px;
-  background-color: cadetblue;
+  background-color: #79a7cc;
   border-radius: 5px;
 
   .logo {
@@ -64,9 +65,11 @@
 }
 .image__label {
   display: flex;
-  padding: 5px;
-  margin-top: 15px;
+  padding: 3px;
   cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  color: darkslategray;
 }
 .logoIcon {
   width: 20px;
