@@ -116,6 +116,7 @@ const Templates = () => {
               {...formData}
               rows={rows}
               logo={logo}
+              logoUpdated={logoUpdated}
               template={template}
               currencySymbol={currencySymbol}
               onPreviewToggle={handleToggle}
