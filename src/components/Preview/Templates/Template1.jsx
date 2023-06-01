@@ -1,6 +1,6 @@
 import { Page, Text, Image, View, StyleSheet, Font } from '@react-pdf/renderer';
 
-const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientEmail, clientPhone, address, city, zipcode, owner, website}) => {
+const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientEmail, clientPhone, address, phone, email, city, zipcode, website}) => {
 
   Font.register({
     family: 'League',
@@ -21,6 +21,10 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
     family: 'Quicksand',
     src: "/assets/Quicksand-Medium.ttf",
   });
+  Font.register({
+    family: 'Quicksand-Light',
+    src: "/assets/Quicksand-Light.ttf",
+  });
 
   const styles = StyleSheet.create({
     body: {
@@ -29,7 +33,6 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       paddingTop: 30,
       color:'#4C3D3D',
       fontFamily: 'Garet',
-      // fontFamily: 'Quicksand',
     },
     invoice_group: {
       flexGrow: 1
@@ -59,15 +62,14 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
     header_details: {
       paddingRight: '20'
     },
-    formName: {
+    bizName1: {
       fontSize: '40px',
       fontFamily: 'League',
-      textTransform: 'uppercase',
-      marginBottom: 10
     },
     bizName: {
-      fontSize: '30px',
+      fontSize: '20px',
       fontFamily: 'League',
+      marginBottom: 5
     },
     invoice_body: {
       marginBottom: 20
@@ -114,7 +116,7 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       paddingBottom: 20,
     },
     total_amount: {
-      fontSize: '24px'
+      fontSize: '24px',
     },
     sub: {
       flexGrow: 1,
@@ -144,17 +146,16 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       flexDirection: 'row'
     }
   })
- 
-  return (  
+
+  return (
     <Page size="A4" style={styles.body}>
       <View style={{display: 'flex', justifyContent: 'center'}}>
         <View style={styles.section}>
           <View style={styles.header_details}>
-            {formName && <Text style={styles.formName}>{formName}</Text>}
-            {businessName && <Text style={styles.bizName}>{businessName}</Text>}
+            {businessName && <Text style={styles.bizName1}>{businessName}</Text>}
 
             <View style={styles.invoice__details}>
-              {InvoiceNo && <Text style={styles.font}>Invoice No. {InvoiceNo}</Text>}
+              {(formName && InvoiceNo) && <Text style={styles.font}>{formName} No. {InvoiceNo}</Text>}
               <Text style={styles.font}>{date}</Text>
             </View>
 
@@ -164,8 +165,13 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
             {clientEmail && <Text style={styles.font}>{clientEmail}</Text>}
             <View style={styles.address__group}>
               {clientAddress && <Text style={styles.font}>{clientAddress}</Text>}
-              {clientCity && <Text style={styles.font}>, {clientCity}</Text>}
-              {clientZipcode && <Text style={styles.font}>, {clientZipcode}</Text>}
+              {clientCity && <Text style={styles.font}>
+                {clientAddress && <Text>, </Text>}
+                {clientCity}</Text>}
+              {clientZipcode && <Text style={styles.font}>
+                {(clientAddress || clientCity )&& <Text>, </Text>}
+                {clientZipcode}
+              </Text>}
             </View>
           </View>
           <View style={styles.logo_wrapper}>
@@ -187,40 +193,44 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
                   <Text style={[styles.item, { marginBottom: '10', fontSize: '14' }]}>{description}</Text>
                   <Text style={{fontSize: '10', opacity: 0.8, width: '95%'}}>{details}</Text>
                 </View>
-                <Text style={[styles.item, {width: '20%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
+                <Text style={[styles.item, {width: '20%', textAlign: 'center'}]}>
+                  <Text style={{fontFamily : 'Quicksand-Light'}}>{currencySymbol}</Text>
+                  <Text>{rate ? rate.toFixed(2) : '0.00'}</Text>
+                </Text>
                 <Text style={[styles.item, {width: '20%', textAlign: 'center'}]}>{quantity}</Text>
-                <Text style={[styles.item, {width: '20%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
+                <Text style={[styles.item, {width: '20%', textAlign: 'right'}]}>
+                  <Text style={{fontFamily : 'Quicksand-Light'}}>{currencySymbol}</Text>
+                  <Text>{amount}</Text>
+                </Text>
               </View>
             ))}
           </View>
           <View style={styles.total_section}>
-            {/* <View style={styles.sub}>
-              <View style={styles.sub_section}>
-                <Text style={styles.table_header}>SUBTOTAL</Text>
-                <Text style={styles.item}>$500.00</Text>
-              </View>
-              <View>
-                <Text style={styles.table_header}>VAT</Text>
-                <Text style={styles.item}>$50.00</Text>
-              </View>
-            </View> */}
-            {/* <View style={styles.total}> */}
-              <Text style={styles.table_header}>TOTAL</Text>
-              <Text style={styles.total_amount}>{currencySymbol}{totalAmount}</Text>
-            {/* </View> */}
+            <Text style={styles.table_header}>TOTAL</Text>
+            <Text style={styles.total_amount}>
+              <Text style={{fontFamily : 'Quicksand'}}>{currencySymbol}</Text>
+              <Text>{totalAmount}</Text>
+            </Text>
           </View>
           <Text style={styles.notes}>{notes}</Text>
           <View wrap={false} style={styles.footer}>
             <View>
-              <Text style={styles.item}>{owner}</Text>
+              <Text style={styles.bizName}>{businessName}</Text>
               <View style={styles.address__group}>
                 {address && <Text style={styles.item}>{address}</Text>}
-                {city && <Text style={styles.item}>, {city}</Text>}
-                {zipcode && <Text style={styles.item}>, {zipcode}</Text>}
+                {city && <Text style={styles.item}>
+                  {address && <Text>, </Text>}
+                  {city}
+                </Text>}
+                {zipcode && <Text style={styles.item}>
+                  {(address || city ) && <Text>, </Text>}
+                  {zipcode}
+                </Text>}
               </View>
               <Text style={styles.item}>{website}</Text>
+              <Text style={styles.item}>{email}</Text>
+              <Text style={styles.item}>{phone}</Text>
             </View>
-            <Text style={styles.item}>____________________________</Text>
           </View>
         </View>
       </View>
