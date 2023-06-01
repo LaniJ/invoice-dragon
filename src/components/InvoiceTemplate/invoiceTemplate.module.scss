@@ -27,7 +27,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 380px;
-  background-color: #2196F3;
   gap: 15px;
   padding: 10px;
 
@@ -57,8 +56,6 @@
 
   .templateImg:hover {
     border: 2px solid red;
-
-
   }
 }
 
