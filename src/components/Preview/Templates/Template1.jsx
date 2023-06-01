@@ -159,7 +159,7 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
               <Text style={styles.font}>{date}</Text>
             </View>
 
-            <Text style={styles.font}>Billed To:</Text>
+            {clientName && <Text style={styles.font}>Billed To:</Text>}
             {clientName && <Text style={styles.font}>{clientName}</Text>}
             {clientPhone && <Text style={styles.font}>{clientPhone}</Text>}
             {clientEmail && <Text style={styles.font}>{clientEmail}</Text>}
