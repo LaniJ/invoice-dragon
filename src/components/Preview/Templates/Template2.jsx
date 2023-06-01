@@ -15,6 +15,11 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
     family: 'Roxborough',
     src: "/assets/Roxborough-CF.ttf",
   });
+  
+  Font.register({
+    family: 'Quicksand',
+    src: "/assets/Quicksand-Medium.ttf",
+  });
 
   Font.register({
     family: 'Quicksand-Bold',
