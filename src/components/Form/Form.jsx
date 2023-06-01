@@ -155,7 +155,7 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
                 type="text" 
                 name="zipcode" 
                 id="zipcode" 
-                placeholder="zipcode"
+                placeholder="postal code"
                 onChange={handleChange}
                 value={prefill.zipcode || ''} 
               />
@@ -182,18 +182,6 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
                 placeholder="https://example-website.com"
                 onChange={handleChange}
                 value={prefill.website || ''} 
-              />
-            </div>
-            <div className={styles.form__field}>
-              <label htmlFor="owner" className={styles.label}>Sender's Name</label>
-              <input
-                className={styles.input__default}
-                type="text" 
-                name="owner" 
-                id="owner" 
-                placeholder="Business owner name"
-                onChange={handleChange}
-                value={prefill.owner || ''} 
               />
             </div>
           </div>
@@ -256,7 +244,7 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
                 type="text" 
                 name="clientZipcode" 
                 id="clientZipcode" 
-                placeholder="zipcode"
+                placeholder="postal code"
                 onChange={handleChange}
                 value={prefill.clientZipcode || ''} 
               />
@@ -285,7 +273,7 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
                 type="text" 
                 name="InvoiceNo" 
                 id="InvoiceNo" 
-                placeholder="INV00001"
+                placeholder="IN001"
                 onChange={handleChange}
                 value={prefill.InvoiceNo || ''} 
               />
