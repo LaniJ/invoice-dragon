@@ -1,6 +1,6 @@
 import { Page, Text, Image, View, StyleSheet, Font } from '@react-pdf/renderer';
 
-const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientEmail, clientPhone, address, city, zipcode, owner, website}) => {
+const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientEmail, clientPhone, address, city, zipcode, phone, email, website}) => {
 
   Font.register({
     family: 'Inter-Regular',
@@ -14,6 +14,11 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
   Font.register({
     family: 'Roxborough',
     src: "/assets/Roxborough-CF.ttf",
+  });
+
+  Font.register({
+    family: 'Quicksand-Bold',
+    src: "/assets/Quicksand-Bold.ttf",
   });
 
   const styles = StyleSheet.create({
@@ -165,7 +170,7 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       alignItems: 'flex-end',
     },
     owner: {
-      fontFamily: 'Roxborough',
+      fontFamily: 'Inter-Bold',
       fontSize: 14,
       marginTop: 5,
       marginBottom: 3,
@@ -185,7 +190,6 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
           </View>}
           <View style={styles.header__text}>
             {formName && <Text style={styles.formName}>{formName}</Text>}
-            {businessName && <Text style={styles.bizName}>{businessName}</Text>}
           </View>
         </View>
         <View style={styles.billing__section}>
@@ -201,7 +205,7 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
             </View>
           </View>
           <View style={styles.invoice__details}>
-            {InvoiceNo && <Text style={styles.text}>Invoice No. {InvoiceNo}</Text>}
+            {InvoiceNo && <Text style={styles.text}>{formName} No. {InvoiceNo}</Text>}
             <Text style={styles.text}>{date}</Text>
           </View>
         </View>
@@ -219,8 +223,14 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
                 <Text style={{fontSize: '10', opacity: 0.8, width: '95%'}}>{details}</Text>
               </View>
               <Text style={[styles.item, {width: '20%', textAlign: 'center'}]}>{quantity}</Text>
-              <Text style={[styles.item, {width: '20%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
-              <Text style={[styles.item, {width: '20%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
+              <Text style={[styles.item, {width: '20%', textAlign: 'center'}]}>
+                <Text style={{fontFamily : 'Quicksand'}}>{currencySymbol}</Text>
+                <Text>{rate ? rate.toFixed(2) : '0.00'}</Text>
+              </Text>
+              <Text style={[styles.item, {width: '20%', textAlign: 'right'}]}>
+                <Text style={{fontFamily : 'Quicksand'}}>{currencySymbol}</Text>
+                <Text>{amount}</Text>
+              </Text>
             </View>
           ))}
           <View style={styles.total__section__wrapper}>
@@ -231,7 +241,10 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
               </View>
               <View style={styles.total}>
                 <Text style={styles.total__text}>Total</Text>
-                <Text>{currencySymbol}{totalAmount}</Text>
+                <Text>
+                  <Text style={{fontFamily : 'Quicksand-Bold'}}>{currencySymbol}</Text>
+                  <Text>{totalAmount}</Text>
+                </Text>
               </View>
             </View>
           </View>
@@ -241,13 +254,14 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
         </View>
         <View wrap={false} style={styles.footer__section}>
           <View style={styles.sender__info}>
-            <Text>____________________________</Text>
-            <Text style={styles.owner}>{owner}</Text>
+            <Text style={styles.owner}>{businessName}</Text>
             <View style={styles.address__group}>
               {address && <Text>{address}</Text>}
               {city && <Text>, {city}</Text>}
               {zipcode && <Text>, {zipcode}</Text>}
             </View>
+            <Text>{phone}</Text>
+            <Text>{email}</Text>
             <Text>{website}</Text>
           </View>
         </View>
