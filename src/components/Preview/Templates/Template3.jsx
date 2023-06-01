@@ -1,6 +1,6 @@
 import { Page, Text, Image, View, StyleSheet, Font } from '@react-pdf/renderer';
 
-const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientPhone, clientEmail, address, city, zipcode, owner, website}) => {
+const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientPhone, clientEmail, address, city, zipcode, website}) => {
 
   Font.register({
     family: 'Poppins-Regular',
@@ -17,6 +17,16 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
   Font.register({
     family: 'Poppins-Light',
     src: "/assets/Poppins-Light.ttf",
+  });
+
+  Font.register({
+    family: 'Quicksand',
+    src: "/assets/Quicksand-Medium.ttf",
+  });
+
+  Font.register({
+    family: 'Quicksand-Bold',
+    src: "/assets/Quicksand-Bold.ttf",
   });
 
   const styles = StyleSheet.create({
@@ -49,6 +59,7 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
     },
     formName: {
       fontSize: '40px',
+      maxWidth: '200px',
       textTransform: 'uppercase',
     },
     bizName: {
@@ -153,7 +164,7 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
     },
     // notes
     note__section: {
-      fontSize: '12px',
+      fontSize: '11px',
       maxWidth: '50%'
     },
     // footer
@@ -195,14 +206,14 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
           {formName && <Text style={styles.formName}>{formName}</Text>}
           <View style={styles.header__text}>
             {businessName && <Text style={styles.bizName}>{businessName} </Text>}
-            {logo && <View style={styles.logo_wrapper} >
+            {(logoUpdated && logo) && <View style={styles.logo_wrapper} >
               <Image src={logo} style={styles.logo}/>
             </View>}
           </View>
         </View>
         <View style={styles.billing__section}>
           <View>
-            {clientName && <Text style={styles.section__tag}>INVOICE TO:</Text>}
+            {clientName && <Text style={styles.section__tag}>{formName} TO:</Text>}
             {clientName && <Text style={[styles.text, {fontFamily: 'Poppins-Bold', fontSize: 14}]}>{clientName}</Text>}
             {clientPhone && <Text style={styles.text}>{clientPhone}</Text>}
             {clientEmail && <Text style={styles.text}>{clientEmail}</Text>}
@@ -215,9 +226,12 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
           </View>
           <View style={styles.invoice__details}>
             <Text style={styles.section__tag}>TOTAL DUE</Text>
-            <Text style={{fontFamily: 'Poppins-Bold', fontSize: 14}}>{currencySymbol}{totalAmount}</Text>
+            <Text style={{fontSize: 14, fontFamily: 'Poppins-Bold'}}>
+              <Text style={{fontFamily : 'Quicksand-Bold'}}>{currencySymbol}</Text>
+              <Text>{totalAmount}</Text>
+            </Text>
             <Text style={styles.divider}></Text>
-            {InvoiceNo && <Text style={styles.text}>Invoice No. {InvoiceNo}</Text>}
+            {InvoiceNo && <Text style={styles.text}>{formName} No. {InvoiceNo}</Text>}
             <Text style={styles.text}>{date}</Text>
           </View>
         </View>
@@ -235,19 +249,26 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
                 <Text style={{fontSize: '10', opacity: 0.8, width: '95%', minWidth: '80%'}}>{details}</Text>
               </View>
               <Text style={[styles.col__colour1, {width: '20%', textAlign: 'center'}]}>{quantity}</Text>
-              <Text style={[styles.col__colour2, {width: '20%', textAlign: 'center'}]}>{currencySymbol}{rate ? rate.toFixed(2) : '0.00'}</Text>
-              <Text style={[styles.col__colour2, {width: '20%', textAlign: 'right'}]}>{currencySymbol}{amount}</Text>
+              <Text style={[styles.col__colour2, {width: '20%', textAlign: 'center'}]}>
+                {/* {currencySymbol}{rate ? rate.toFixed(2) : '0.00'} */}
+                <Text style={{fontFamily : 'Quicksand'}}>{currencySymbol}</Text>
+                <Text>{rate ? rate.toFixed(2) : '0.00'}</Text>
+              </Text>
+
+              <Text style={[styles.col__colour2, {width: '20%', textAlign: 'right'}]}>
+                <Text style={{fontFamily : 'Quicksand'}}>{currencySymbol}</Text>
+                <Text>{amount}</Text>
+              </Text>
             </View>
           ))}
           <View style={styles.total__section__wrapper}>
             <View style={styles.total__section}>
-              {/* <View style={styles.subtotal}>
-                <Text>Subtotal</Text>
-                <Text>{currencySymbol}{totalAmount}</Text>
-              </View> */}
               <View style={styles.total}>
                 <Text>Total</Text>
-                <Text>{currencySymbol}{totalAmount}</Text>
+                <Text>
+                  <Text style={{fontFamily : 'Quicksand-Bold'}}>{currencySymbol}</Text>
+                  <Text>{totalAmount}</Text>
+                </Text>
               </View>
             </View>
           </View>
@@ -257,13 +278,14 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
         </View>
         <View wrap={false} style={styles.footer__section}>
           <View style={styles.sender__info}>
-            <Text>____________________________</Text>
-            <Text style={styles.owner}>{owner}</Text>
+            <Text style={styles.owner}>{businessName}</Text>
             <View style={styles.address__group}>
               {address && <Text>{address}</Text>}
               {city && <Text>, {city}</Text>}
               {zipcode && <Text>, {zipcode}</Text>}
             </View>
+            <Text>{phone}</Text>
+            <Text>{email}</Text>
             <Text>{website}</Text>
           </View>
         </View>
@@ -272,4 +294,4 @@ const Template2 = ({totalAmount, rows, email, phone, logo, notes, currencySymbol
   );
 }
  
-export default Template2;
+export default Template3;

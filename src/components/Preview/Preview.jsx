@@ -6,7 +6,7 @@ import Template2 from "./Templates/Template2";
 import Template3 from "./Templates/Template3";
 import Template4 from "./Templates/Template4";
 
-const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes }) => {
+const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes }) => {
   const [totalAmount, setTotalAmount] = useState(null);
 
   const handleTotalCalculation = () => {
@@ -87,6 +87,7 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessNa
       {template === 'template3' && 
         <Template3 
           logo={logo}
+          logoUpdated={logoUpdated}
           formName={formName}
           businessName={businessName}
           InvoiceNo={InvoiceNo}
@@ -135,12 +136,11 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, email, businessNa
           website={website}
         /> 
       }
-
     </Document>
    );
 }
 
-const PDFView = ({ template, rows, currencySymbol, formName, logo, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes }) => {
+const PDFView = ({ template, rows, currencySymbol, formName, logo, logoUpdated, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes }) => {
   
   const [client, setClient] = useState(false);
 
@@ -158,6 +158,7 @@ const PDFView = ({ template, rows, currencySymbol, formName, logo, email, busine
           businessName={businessName}
           formName={formName}
           logo={logo}
+          logoUpdated={logoUpdated}
           address={address}
           city={city}
           zipcode={zipcode}
@@ -182,4 +183,3 @@ const PDFView = ({ template, rows, currencySymbol, formName, logo, email, busine
 }
  
 export default PDFView;
-// export default PDF;
