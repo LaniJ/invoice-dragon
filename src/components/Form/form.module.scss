@@ -41,6 +41,12 @@
     cursor: pointer;
     position: relative;
 
+    &:hover {
+      .image__label {
+        display: flex;
+      }
+    }
+
     @media screen and (max-width: 768px) {
       display: block;
       margin-top: 15px;
@@ -64,7 +70,7 @@
   }
 }
 .image__label {
-  display: flex;
+  display: none;
   padding: 3px;
   cursor: pointer;
   position: absolute;
