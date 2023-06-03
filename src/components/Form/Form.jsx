@@ -26,9 +26,6 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
   const removeRow = (id) => {
     onRowRemove(id);
   }
-  // const getExtraProps = (name) => {
-  //   return isFirstTime ? {value :  prefill[name] } : {}
-  // }
 
   const changeImage = () => {
     imageRef.current.click();
@@ -62,8 +59,6 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
             placeholder="Invoice "
             onChange={handleChange}
             value={prefill.formName || ''} 
-            // {...getExtraProps("formName")}
-            // {isFirstTime ? {value :  pri.formName } : {}}
           />
           <div className={styles.photo__drop__zone}>
             <input 
@@ -291,18 +286,6 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
                 value={prefill.date || ''} 
               />
             </div>
-            {/* <div className={styles.form__field}>
-              <label htmlFor="terms" className={styles.label}>Terms</label>
-              <input
-                className={styles.input__default}
-                type="text" 
-                name="terms" 
-                id="terms" 
-                placeholder="One week"
-                onChange={handleChange}
-                value={prefill.terms || ''} 
-              />
-            </div> */}
           </div>
         </div>
 
@@ -316,7 +299,7 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
           onModifyTable={updateTable}
         />
         <section className={styles.total__section}>
-          <div className={styles.total}>
+          <div>
             <span>Total</span>
             <span className={styles.total}>{currencySymbol}{total.toFixed(2)}</span>
           </div>

@@ -296,8 +296,19 @@
 .total__section {
   text-align: right;
 
+  @media screen and (max-width: 768px) {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+
   .total {
     padding-left: 90px;
+
+    @media screen and (max-width: 768px) {
+      padding-left: 20px;
+    }
   }
 }
 // mobile //
