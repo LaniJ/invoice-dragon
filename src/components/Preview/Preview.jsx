@@ -133,6 +133,7 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, emai
           city={city}
           zipcode={zipcode}
           phone={phone}
+          email={email}
           website={website}
         /> 
       }
