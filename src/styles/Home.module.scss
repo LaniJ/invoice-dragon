@@ -12,6 +12,9 @@
   max-width: 1200px;
   margin: 0 auto;
 
+  @media screen and (max-width: 915px) {
+   padding: 40px;
+  }
   @media screen and (max-width: 768px) {
    padding: 20px;
   }
@@ -33,7 +36,7 @@
   display: flex;
   justify-content: space-between;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 915px) {
     flex-direction: column;
   }
 

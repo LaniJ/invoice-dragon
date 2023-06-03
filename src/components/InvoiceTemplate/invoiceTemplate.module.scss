@@ -30,6 +30,10 @@
   gap: 15px;
   padding: 10px;
 
+  @media screen and (max-width: 915px) {
+    grid-template-columns: 1fr 1fr 1fr;
+   }
+
   @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
