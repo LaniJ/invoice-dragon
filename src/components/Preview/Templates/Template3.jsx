@@ -3,10 +3,6 @@ import { Page, Text, Image, View, StyleSheet, Font } from '@react-pdf/renderer';
 const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientPhone, clientEmail, address, city, zipcode, website}) => {
 
   Font.register({
-    family: 'Poppins-Regular',
-    src: "/assets/Poppins-Regular.ttf",
-  });
-  Font.register({
     family: 'Poppins-Bold',
     src: "/assets/Poppins-Bold.ttf",
   });
@@ -217,11 +213,16 @@ const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, c
             {clientName && <Text style={[styles.text, {fontFamily: 'Poppins-Bold', fontSize: 14}]}>{clientName}</Text>}
             {clientPhone && <Text style={styles.text}>{clientPhone}</Text>}
             {clientEmail && <Text style={styles.text}>{clientEmail}</Text>}
-            {/* {clientAddress && <Text style={styles.text}>{clientAddress}, {clientCity}, {clientZipcode}</Text>} */}
             <View style={styles.address__group}>
               {clientAddress && <Text>{clientAddress}</Text>}
-              {clientCity && <Text>, {clientCity}</Text>}
-              {clientZipcode && <Text>, {clientZipcode}</Text>}
+              {clientCity && <Text style={styles.font}>
+                {clientAddress && <Text>, </Text>}
+                <Text>{clientCity}</Text>
+              </Text>}
+              {clientZipcode && <Text style={styles.font}>
+                {(clientAddress || clientCity )&& <Text>, </Text>}
+                <Text>{clientZipcode}</Text>
+              </Text>}
             </View>
           </View>
           <View style={styles.invoice__details}>
@@ -250,7 +251,6 @@ const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, c
               </View>
               <Text style={[styles.col__colour1, {width: '20%', textAlign: 'center'}]}>{quantity}</Text>
               <Text style={[styles.col__colour2, {width: '20%', textAlign: 'center'}]}>
-                {/* {currencySymbol}{rate ? rate.toFixed(2) : '0.00'} */}
                 <Text style={{fontFamily : 'Quicksand'}}>{currencySymbol}</Text>
                 <Text>{rate ? rate.toFixed(2) : '0.00'}</Text>
               </Text>
@@ -281,8 +281,14 @@ const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, c
             <Text style={styles.owner}>{businessName}</Text>
             <View style={styles.address__group}>
               {address && <Text>{address}</Text>}
-              {city && <Text>, {city}</Text>}
-              {zipcode && <Text>, {zipcode}</Text>}
+              {city && <Text>
+                {address && <Text>, </Text>}
+                <Text>{city}</Text>
+              </Text>}
+              {zipcode && <Text>
+                {(address || city ) && <Text>, </Text>}
+                <Text>{zipcode}</Text>
+              </Text>}
             </View>
             <Text>{phone}</Text>
             <Text>{email}</Text>

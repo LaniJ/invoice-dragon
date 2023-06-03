@@ -106,14 +106,13 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       fontSize: '18px',
     },
     total_section: {
-      flexGrow: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
       borderTop: '0.5px solid #000000',
       borderBottom: '0.5px solid #000000',
-      paddingTop: 20,
-      paddingBottom: 20,
+      paddingTop: 10,
+      paddingBottom: 10,
     },
     total_amount: {
       fontSize: '24px',
@@ -166,11 +165,11 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
             <View style={styles.address__group}>
               {clientAddress && <Text style={styles.font}>{clientAddress}</Text>}
               {clientCity && <Text style={styles.font}>
-                {clientAddress && <Text>, </Text>}
-                {clientCity}</Text>}
+                {clientAddress && <Text>, </Text>}<Text>{clientCity}</Text>
+              </Text>}
               {clientZipcode && <Text style={styles.font}>
                 {(clientAddress || clientCity )&& <Text>, </Text>}
-                {clientZipcode}
+                <Text>{clientZipcode}</Text>
               </Text>}
             </View>
           </View>
@@ -212,19 +211,16 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
               <Text>{totalAmount}</Text>
             </Text>
           </View>
-          <Text style={styles.notes}>{notes}</Text>
+          {notes && <Text style={styles.notes}>{notes}</Text>}
           <View wrap={false} style={styles.footer}>
             <View>
               <Text style={styles.bizName}>{businessName}</Text>
               <View style={styles.address__group}>
                 {address && <Text style={styles.item}>{address}</Text>}
-                {city && <Text style={styles.item}>
-                  {address && <Text>, </Text>}
-                  {city}
-                </Text>}
+                {city && <Text style={styles.item}>{address && <Text>, </Text>}<Text>{city}</Text></Text>}
                 {zipcode && <Text style={styles.item}>
                   {(address || city ) && <Text>, </Text>}
-                  {zipcode}
+                  <Text>{zipcode}</Text>
                 </Text>}
               </View>
               <Text style={styles.item}>{website}</Text>

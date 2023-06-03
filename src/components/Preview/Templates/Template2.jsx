@@ -40,7 +40,7 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: 40
+      marginBottom: 20
     },
     logo_wrapper: {
       width: '100',
@@ -65,7 +65,7 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBottom: 40
+      marginBottom: 30
     },
     section__tag: {
       fontFamily: 'Inter-Bold',
@@ -96,7 +96,7 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       flexGrow: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop: '20px',
+      marginTop: '15px',
       padding: '10px 7px 10px 7px',
       borderTop: 0.5,
       borderTopColor: '#000000',
@@ -205,8 +205,16 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
             {clientEmail && <Text style={styles.text}>{clientEmail}</Text>}
             <View style={styles.address__group}>
               {clientAddress && <Text>{clientAddress}</Text>}
-              {clientCity && <Text>, {clientCity}</Text>}
-              {clientZipcode && <Text>, {clientZipcode}</Text>}
+              {clientCity && <Text style={styles.font}>
+                {clientAddress && <Text>, </Text>}
+                <Text>{clientCity}</Text>
+              </Text>}
+
+              {clientZipcode && <Text style={styles.font}>
+                {(clientAddress || clientCity )&& <Text>, </Text>}
+                <Text>{clientZipcode}</Text>
+              </Text>}
+
             </View>
           </View>
           <View style={styles.invoice__details}>
@@ -262,8 +270,15 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
             <Text style={styles.owner}>{businessName}</Text>
             <View style={styles.address__group}>
               {address && <Text>{address}</Text>}
-              {city && <Text>, {city}</Text>}
-              {zipcode && <Text>, {zipcode}</Text>}
+              {city && <Text>
+                {address && <Text>, </Text>}
+                <Text>{city}</Text>
+              </Text>}
+              {zipcode && <Text>
+                {(address || city ) && <Text>, </Text>}
+                <Text>{zipcode}</Text>
+              </Text>}
+
             </View>
             <Text>{phone}</Text>
             <Text>{email}</Text>
