@@ -283,6 +283,10 @@
 }
 .btn__add {
   background-color: #444;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 20px;
+  }
 }
 .svg__close__icon {
   width: 0.6875em;

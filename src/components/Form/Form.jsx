@@ -138,7 +138,7 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
                 type="text" 
                 name="city" 
                 id="city" 
-                placeholder="city, state"
+                placeholder="city, state, country"
                 onChange={handleChange}
                 value={prefill.city || ''} 
               />
@@ -227,7 +227,7 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
                 type="text" 
                 name="clientCity" 
                 id="clientCity" 
-                placeholder="city, state"
+                placeholder="city, state, country"
                 onChange={handleChange}
                 value={prefill.clientCity || ''} 
               />
@@ -275,13 +275,12 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
             </div>
             {/* change placeholder to be toady's date by default */}
             <div className={styles.form__field}>
-              <label htmlFor="date" className={styles.label}>Date</label>
+              <label htmlFor="date" className={styles.label}>Due Date</label>
               <input
                 className={styles.input__default}
                 type="date" 
                 name="date" 
                 id="date" 
-                placeholder="Apr 11, 2023"
                 onChange={handleChange}
                 value={prefill.date || ''} 
               />
