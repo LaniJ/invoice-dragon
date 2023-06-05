@@ -42,7 +42,6 @@ const Template4 = ({totalAmount, rows, phone, email, logo, notes, currencySymbol
     company__info: {
       display: 'flex',
       flexDirection: 'column',
-      // alignItems: 'flex-end',
       fontSize: 11
     },
     logo_wrapper: {

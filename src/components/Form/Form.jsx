@@ -92,7 +92,7 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
           </div>
         </div>
         <div className={styles.invoice__details}>
-          <div className={styles.biz__section}>
+          <div>
             <h3>From:</h3>
             <br /><br />
             <div className={styles.form__field}>
@@ -181,7 +181,7 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
             </div>
           </div>
 
-          <div className={styles.customer__section}>
+          <div>
             <h3>Bill To:</h3>  
             <br /><br />
             <div className={styles.form__field}>
@@ -273,7 +273,6 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
                 value={prefill.InvoiceNo || ''} 
               />
             </div>
-            {/* change placeholder to be toady's date by default */}
             <div className={styles.form__field}>
               <label htmlFor="date" className={styles.label}>Due Date</label>
               <input

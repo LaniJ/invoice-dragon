@@ -80,7 +80,6 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               value={item.quantity || ''} 
             />
           </td>
-          {/* <td className={styles.amount}>{currencySymbol} rate - {Number(item.rate)} qty - {item.quantity} {item.rate * item.quantity}</td> */}
           <td className={styles.amount}>
             <span>{currencySymbol} </span>
             <span>{calculateAmount(item.rate, item.quantity, item.id)}</span>
@@ -143,7 +142,6 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
             </div>
           </div>
           
-          {/* <div className={styles.tax}>Tax</div> */}
           <div className={styles.item__row__actions__mobile}>
             <div className={styles.confirm__delete__button}>
               <button
