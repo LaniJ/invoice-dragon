@@ -44,13 +44,8 @@ const Template4 = ({totalAmount, rows, phone, email, logo, notes, currencySymbol
       flexDirection: 'column',
       fontSize: 11
     },
-    logo_wrapper: {
-      width: '70',
-      height: '70',
-    },
     logo: {
-      width: '100%',
-      height: '100%',
+      height: '70',
     },
     formName: {
       fontSize: '40px',
@@ -167,7 +162,7 @@ const Template4 = ({totalAmount, rows, phone, email, logo, notes, currencySymbol
       <View>
         <View style={styles.header__section}>
           <View>
-            {logo && <View style={styles.logo_wrapper}>
+            {logo && <View>
               <Image src={logo} style={styles.logo}/>
             </View>}
           </View>

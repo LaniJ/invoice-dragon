@@ -51,13 +51,10 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       },
     },
     logo_wrapper: {
-      width: '100',
-      height: '100',
       marginTop: 30,
     },
     logo: {
-      width: '100%',
-      height: '100%',
+      height: '100',
     },
     header_details: {
       paddingRight: '20'

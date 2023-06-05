@@ -45,13 +45,8 @@ const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, c
       borderBottomColor: 'rgba(0,0,0,0.3)',
       borderBottomStyle: 'solid',
     },
-    logo_wrapper: {
-      width: '50',
-      height: '50',
-    },
     logo: {
-      width: '100%',
-      height: '100%',
+      height: '50',
     },
     formName: {
       fontSize: '40px',
@@ -202,7 +197,7 @@ const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, c
           {formName && <Text style={styles.formName}>{formName}</Text>}
           <View style={styles.header__text}>
             {businessName && <Text style={styles.bizName}>{businessName} </Text>}
-            {(logoUpdated && logo) && <View style={styles.logo_wrapper} >
+            {(logoUpdated && logo) && <View>
               <Image src={logo} style={styles.logo}/>
             </View>}
           </View>

@@ -43,13 +43,10 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       marginBottom: 20
     },
     logo_wrapper: {
-      width: '100',
-      height: '100',
       marginTop: 30,
     },
     logo: {
-      width: '100%',
-      height: '100%',
+      height: '100',
     },
     formName: {
       fontSize: '40px',
