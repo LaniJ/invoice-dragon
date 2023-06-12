@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import Script from 'next/script';
+
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
@@ -96,6 +98,14 @@ const Templates = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-LHPWMTY60Z"></Script>
+      <Script id="google-analytics">
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-LHPWMTY60Z');`}
+      </Script>
       <main>
         <div className={styles.template__wrapper}>
           <div className={styles.header}>

@@ -1,4 +1,4 @@
-import Script from 'next/script'
+import Script from 'next/script';
 import Head from 'next/head';
 import styles from '@/styles/Home.module.scss';
 import HomePage from '../components/Home/HomePage';
