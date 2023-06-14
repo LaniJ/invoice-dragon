@@ -1,38 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Invoice Dragon
 
-## Getting Started
+> Generate invoices and receipts simply by filling a form.
 
-First, run the development server:
+Invoice Dragon is a lightning-fast application that simplifies the process of generating professional Invoices and Receipts for your business needs. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Simply fill a form, select a template and generate your document!
+Visit the website at https://invoicedragon.com
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Features
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- **Speed and Efficiency:** Invoice Dragon is designed to streamline the invoicing process, ensuring that you can create invoices quickly and efficiently. It focuses solely on generating invoices in the most time-effective manner.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- **Speed and Efficiency:** Invoice Dragon is time efficient. You only need to fill your details into a form, and we automate the rest.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **Customization Options:** Offers 4 different templates to choose from. More templates coming soon.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Export your invoices as PDF:** Easily share invoices with clients and colleagues.
 
-## Learn More
+### Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+To start using Invoice Dragon, simply visit [Invoice Dragon.com](https://www.invoicedragon.com) . You can begin generating invoices immediately. 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Why did I build this?
+Over the years I've run a couple of businesses where I'd typically have to make invoices and receipts. 
+I've recently found the process of creating and editing invoice templates to be quite cumbersome, particularly when I have to make invoices for a good number of clients. The process of editing and ensuring everything is as I want it to be usually takes up too much time. 
+So I decided to build this app to ensure invoices and receipts can be built, reviewed and saved as PDF... all at lighting-fast speed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Contributions
+Yes please! Contributions are welcome! If you have any ideas, bug fixes, or enhancements, feel free to submit a PR :)
 
-## Deploy on Vercel
+### License
+Invoice Dragon is a free software application released under the MIT License. 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Thank you for choosing Invoice Dragon! We hope this application simplifies your invoicing process and saves you valuable time. If  
+you have any further questions or need assistance, please don't hesitate to reach out. Happy invoicing!
