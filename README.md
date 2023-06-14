@@ -34,5 +34,4 @@ Invoice Dragon is a free software application released under the MIT License.
 
 ---
 
-Thank you for choosing Invoice Dragon! We hope this application simplifies your invoicing process and saves you valuable time. If  
-you have any further questions or need assistance, please don't hesitate to reach out. Happy invoicing!
+Thank you for choosing Invoice Dragon! We hope this application simplifies your invoicing process and saves you valuable time. If you have any further questions or need assistance, please don't hesitate to reach out. Happy invoicing!
