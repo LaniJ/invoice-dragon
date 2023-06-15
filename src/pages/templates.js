@@ -117,8 +117,8 @@ const Templates = () => {
       email={formData.email}
       businessName={formData.businessName}
       formName={formData.formName}
-      logo={formData.logo}
-      logoUpdated={formData.logoUpdated}
+      logo={logo}
+      logoUpdated={logoUpdated}
       address={formData.address}
       city={formData.city}
       zipcode={formData.zipcode}
