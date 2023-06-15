@@ -4,14 +4,11 @@ import invTemp1 from '../../assets/images/invTemp1.png';
 import invTemp2 from '../../assets/images/invTemp2.png';
 import invTemp3 from '../../assets/images/invTemp3.png';
 import invTemp4 from '../../assets/images/invTemp4.png';
-import { useState } from "react";
 
 
-const InvoiceTemplate = ({ changeTemplate }) => {
-  const [selectedOption, setSelectedOption] = useState('option1');
+const InvoiceTemplate = ({ template, changeTemplate }) => {
 
   const handleChange = (e) => {
-    setSelectedOption(e.target.value)
     changeTemplate(e);
   }
 
@@ -29,7 +26,7 @@ const InvoiceTemplate = ({ changeTemplate }) => {
               name="test" 
               value="template1" 
               id="template1"
-              checked={selectedOption==='template1'}
+              checked={template === 'template1'}
               onChange={handleChange} 
             />
             <Image
@@ -50,7 +47,7 @@ const InvoiceTemplate = ({ changeTemplate }) => {
               name="test" 
               value="template2"
               id="template2"
-              checked={selectedOption==='template2'}
+              checked={template === 'template2'}
               onChange={handleChange} 
             />
             <Image
@@ -71,7 +68,7 @@ const InvoiceTemplate = ({ changeTemplate }) => {
               name="test" 
               value="template3" 
               id="template3"
-              checked={selectedOption==='template3'}
+              checked={template === 'template3'}
               onChange={handleChange} 
             />
 
@@ -92,7 +89,7 @@ const InvoiceTemplate = ({ changeTemplate }) => {
               name="test" 
               value="template4" 
               id="template4"
-              checked={selectedOption==='template4'}
+              checked={template === 'template4'}
               onChange={handleChange} 
             />
             <Image
