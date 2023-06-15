@@ -46,9 +46,6 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       flexGrow: 1,
       borderBottom: '0.5px solid #000000',
 
-      '@media max-width: 400': {
-        width: 300,
-      },
     },
     logo_wrapper: {
       marginTop: 30,
@@ -170,9 +167,9 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
               </Text>}
             </View>
           </View>
-          <View style={styles.logo_wrapper}>
+          {logo && <View style={styles.logo_wrapper}>
             <Image src={logo} style={styles.logo}/>
-          </View>
+          </View>}
         </View>
         <View style={styles.invoice_group}>
           <View style={styles.invoice_body}>
