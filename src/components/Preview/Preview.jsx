@@ -6,31 +6,14 @@ import Template2 from "./Templates/Template2";
 import Template3 from "./Templates/Template3";
 import Template4 from "./Templates/Template4";
 
-const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes }) => {
-  const [totalAmount, setTotalAmount] = useState(null);
-
-  const handleTotalCalculation = () => {
-    let sum = 0;
-    rows.forEach(row => {
-      sum += parseFloat(row.amount);
-    })
-    setTotalAmount(numberWithCommas(sum.toFixed(2)))
-  }
-
-  function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
-  useEffect(() => {
-    handleTotalCalculation();
-  }, [])
+const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes, totalAmount }) => {
 
   return ( 
     <Document
       author={owner}
       keywords="invoice, receipt"
       subject={`${businessName} Invoice`}
-      title="Invoice"
+      title={`${clientName} ${formName} `}
     >
       {template === 'template1' && 
         <Template1 
@@ -147,40 +130,63 @@ const PDFView = ({ template, rows, currencySymbol, formName, logo, logoUpdated, 
 
   useEffect(() => {
     setClient(true);
+  }, []);
+
+  const [totalAmount, setTotalAmount] = useState(null);
+
+  const handleTotalCalculation = () => {
+    let sum = 0;
+    rows.forEach(row => {
+      sum += parseFloat(row.amount);
+    })
+    setTotalAmount(numberWithCommas(sum.toFixed(2)))
+  }
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  useEffect(() => {
+    handleTotalCalculation();
   }, [])
+
+  const pdf = (
+    <PDF
+      template={template}
+      rows={rows}
+      email={email}
+      businessName={businessName}
+      formName={formName}
+      logo={logo}
+      logoUpdated={logoUpdated}
+      address={address}
+      city={city}
+      zipcode={zipcode}
+      phone={phone}
+      owner={owner}
+      clientName={clientName}
+      clientEmail={clientEmail}
+      clientAddress={clientAddress}
+      clientCity={clientCity}
+      clientZipcode={clientZipcode}
+      clientPhone={clientPhone}
+      date={date}
+      InvoiceNo={InvoiceNo}
+      website={website}
+      notes={notes}
+      currencySymbol={currencySymbol}
+      totalAmount={totalAmount}
+    />
+  );
   
   return ( 
     <>
       <PDFViewer className={styles.full}>
-        <PDF 
-          template={template}
-          rows={rows}
-          email={email} 
-          businessName={businessName}
-          formName={formName}
-          logo={logo}
-          logoUpdated={logoUpdated}
-          address={address}
-          city={city}
-          zipcode={zipcode}
-          phone={phone}
-          owner={owner}
-          clientName={clientName}
-          clientEmail={clientEmail}
-          clientAddress={clientAddress}
-          clientCity={clientCity}
-          clientZipcode={clientZipcode}
-          clientPhone={clientPhone}
-          date={date}
-          InvoiceNo={InvoiceNo}
-          website={website}
-          notes={notes}
-          currencySymbol={currencySymbol}
-          >
-        </PDF>
+       {pdf}
       </PDFViewer>
     </>
    );
 }
  
 export default PDFView;
+export { PDF };

@@ -98,4 +98,8 @@
     background-color: #79a7cc;
     font-weight: 500;
   }
+  &:disabled {
+    background-color: gray;
+    cursor: default;
+  }
 }

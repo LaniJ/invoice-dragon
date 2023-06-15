@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import Script from 'next/script';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import { PDF } from '../components/Preview/Preview';
 import InvoiceTemplate from "../components/InvoiceTemplate/InvoiceTemplate";
 import Dropdown from '../components/Dropdown/Dropdown';
 import styles from '@/styles/Home.module.scss';
@@ -26,6 +28,7 @@ const Templates = () => {
   const [currencyCode, setCurrencyCode] = useState('USD');
   const [template, setTemplate] = useState(null);
   const [templateSelected, setTemplateSelected] = useState(false);
+  const [total, setTotal] = useState(0);
 
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
@@ -90,6 +93,52 @@ const Templates = () => {
     setCurrencySymbol(curr.symbol);
   }
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  const calculateTotal = () => {
+    let sum = 0;
+    rows.forEach(row => {
+      sum += parseFloat(row.amount);
+    })
+    setTotal(numberWithCommas(sum.toFixed(2)));
+  }
+
+  useEffect(() => {
+    calculateTotal();
+  }, [rows]);
+
+
+  const pdf = (
+    <PDF
+      template={template}
+      rows={rows}
+      email={formData.email}
+      businessName={formData.businessName}
+      formName={formData.formName}
+      logo={formData.logo}
+      logoUpdated={formData.logoUpdated}
+      address={formData.address}
+      city={formData.city}
+      zipcode={formData.zipcode}
+      phone={formData.phone}
+      owner={formData.owner}
+      clientName={formData.clientName}
+      clientEmail={formData.clientEmail}
+      clientAddress={formData.clientAddress}
+      clientCity={formData.clientCity}
+      clientZipcode={formData.clientZipcode}
+      clientPhone={formData.clientPhone}
+      date={formData.date}
+      InvoiceNo={formData.InvoiceNo}
+      website={formData.website}
+      notes={formData.notes}
+      currencySymbol={currencySymbol}
+      totalAmount={total}
+    />
+  );
+
   return ( 
     <>
       <Head>
@@ -113,6 +162,7 @@ const Templates = () => {
           </div>
           <div className={styles.container}>
             <InvoiceTemplate
+              template={template}
               changeTemplate={handleTemplateChange}
             />
             {templateSelected && <div className={styles.template__section}>
@@ -147,6 +197,17 @@ const Templates = () => {
                   <br />
                   <br />
                   <button className={styles.action__btn} onClick={handleToggle}>{showPreview ? 'Back to Edit' : 'Preview Invoice'}</button>
+                  <br />
+                  <br />
+                  <div>
+                    <PDFDownloadLink 
+                      document={pdf}
+                      fileName={`${formData.clientName}_${formData.formName}.pdf`}>
+                      {({ blob, url, loading, error }) =>
+                        <button className={styles.action__btn} disabled={!showPreview}>Download PDF</button> 
+                      }
+                    </PDFDownloadLink>
+                  </div>
                   <br />
                   <br />
                   <Dropdown
