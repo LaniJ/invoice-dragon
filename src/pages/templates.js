@@ -13,14 +13,16 @@ import Form from "../components/Form/Form";
 import Header from '@/components/Header/Header';
 import logoP from '../assets/images/placeholder-image.png';
 import Previewed from "../components/Preview/Preview";
+import useTranslation from 'next-translate/useTranslation'
 
 
 
 const Templates = () => {
   // const [service, setService] = useState('invoice');
+  const { t } = useTranslation('common')
 
   const [showPreview, setShowPreview] = useState(false);
-  const [formData, setFormData] = useState({formName: 'Invoice'});
+  const [formData, setFormData] = useState({formName: t('invoice')});
   const [rows, setRows] = useState(Array(1).fill({id: 0, quantity: 1, amount: '0.00'}));
   const [logo, setLogo] = useState(logoP);
   const [logoUpdated, setLogoUpdated] = useState(false);
@@ -29,6 +31,8 @@ const Templates = () => {
   const [template, setTemplate] = useState(null);
   const [templateSelected, setTemplateSelected] = useState(false);
   const [total, setTotal] = useState(0);
+
+
 
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
@@ -109,6 +113,8 @@ const Templates = () => {
     calculateTotal();
   }, [rows]);
 
+  console.log(formData)
+
 
   const pdf = (
     <PDF
@@ -139,7 +145,7 @@ const Templates = () => {
     />
   );
 
-  return ( 
+  return (
     <>
       <Head>
         <title>Invoice Dragon</title>
@@ -180,8 +186,8 @@ const Templates = () => {
                   onRowRemove={handleRowRemove}
                   onTableUpdate={handleTableUpdate}
                   />}
-                
-                {showPreview && <Previewed 
+
+                {showPreview && <Previewed
                   {...formData}
                   rows={rows}
                   logo={logo}
@@ -193,18 +199,18 @@ const Templates = () => {
               </div>
               <div className={styles.action__section}>
                 <div className={styles.actions}>
-                  ACTIONS
+                  {t('actions')}
                   <br />
                   <br />
-                  <button className={styles.action__btn} onClick={handleToggle}>{showPreview ? 'Back to Edit' : 'Preview Invoice'}</button>
+                  <button className={styles.action__btn} onClick={handleToggle}>{showPreview ? t('back_to_edit') : t('preview_invoice')}</button>
                   <br />
                   <br />
                   <div>
-                    <PDFDownloadLink 
+                    <PDFDownloadLink
                       document={pdf}
                       fileName={`${formData.clientName}_${formData.formName}.pdf`}>
                       {({ blob, url, loading, error }) =>
-                        <button className={styles.action__btn} disabled={!showPreview}>Download PDF</button> 
+                        <button className={styles.action__btn} disabled={!showPreview}>{t('download_pdf')}</button>
                       }
                     </PDFDownloadLink>
                   </div>
@@ -224,5 +230,5 @@ const Templates = () => {
     </>
    );
 }
- 
+
 export default Templates;

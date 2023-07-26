@@ -3,15 +3,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../assets/icons/logo.svg';
 import githubIcon from '../../assets/icons/githubIcon.svg';
+import useTranslation from 'next-translate/useTranslation'
 
 const Header = () => {
-  return (  
+  const { t } = useTranslation('common')
+  return (
     <div className={styles.header}>
       <div>
         <Link className={styles.pageLogo} href="/" passHref={true}>
           <Image
             src={logo}
-            alt="Page Logo"
+            alt={t('page_logo')}
             priority
           />
         </Link>
@@ -20,7 +22,7 @@ const Header = () => {
         <a href="https://github.com/LaniJ/Invoice-Receipt-Generator" target="_blank">
           <Image
             src={githubIcon}
-            alt="Github icon"
+            alt={t('github_icon')}
             priority
           />
         </a>
@@ -29,5 +31,5 @@ const Header = () => {
     </div>
   );
 }
- 
+
 export default Header;

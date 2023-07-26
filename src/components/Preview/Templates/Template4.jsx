@@ -1,6 +1,8 @@
 import { Page, Text, Image, View, StyleSheet, Font } from '@react-pdf/renderer';
+import useTranslation from 'next-translate/useTranslation'
 
 const Template4 = ({totalAmount, rows, phone, email, logo, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientPhone, clientEmail, address, city, zipcode, website}) => {
+  const { t } = useTranslation('common')
 
   Font.register({
     family: 'Garet',
@@ -156,8 +158,8 @@ const Template4 = ({totalAmount, rows, phone, email, logo, notes, currencySymbol
       flexDirection: 'row'
     }
   })
- 
-  return (  
+
+  return (
     <Page size="A4" style={styles.body}>
       <View>
         <View style={styles.header__section}>
@@ -196,7 +198,7 @@ const Template4 = ({totalAmount, rows, phone, email, logo, notes, currencySymbol
               {clientCity && <Text style={styles.font}>
                 {clientAddress && <Text>, </Text>}
                 <Text>{clientCity}</Text>
-                
+
               </Text>}
               {clientZipcode && <Text style={styles.font}>
                 {(clientAddress || clientCity )&& <Text>, </Text>}
@@ -212,10 +214,10 @@ const Template4 = ({totalAmount, rows, phone, email, logo, notes, currencySymbol
         </View>
         <View style={styles.invoice__details__section}>
           <View style={styles.invoice_header}>
-            <Text style={{width: '40%'}}>DESCRIPTION</Text>
-            <Text style={{width: '20%', textAlign: 'center'}}>QTY</Text>
-            <Text style={{width: '20%', textAlign: 'center'}}>PRICE</Text>
-            <Text style={{width: '20%', textAlign: 'right'}}>TOTAL</Text>
+            <Text style={{width: '40%'}}>{t('description')}</Text>
+            <Text style={{width: '20%', textAlign: 'center'}}>{t('qty')}</Text>
+            <Text style={{width: '20%', textAlign: 'center'}}>{t('price')}</Text>
+            <Text style={{width: '20%', textAlign: 'right'}}>{t('total')}</Text>
           </View>
           {rows.map(({ id, description, details, rate, quantity, amount }) => (
             <View style={styles.invoice_item} key={id}>
@@ -249,5 +251,5 @@ const Template4 = ({totalAmount, rows, phone, email, logo, notes, currencySymbol
     </Page>
   );
 }
- 
+
 export default Template4;

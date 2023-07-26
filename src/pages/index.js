@@ -3,24 +3,26 @@ import Head from 'next/head';
 import styles from '@/styles/Home.module.scss';
 import HomePage from '../components/Home/HomePage';
 import Header from '../components/Header/Header';
+import useTranslation from 'next-translate/useTranslation'
 
 export default function Home() {
+  const { t, lang } = useTranslation('common')
 
   return (
     <>
       <Head>
-        <title>Invoice Dragon</title>
-        <title>Invoice Dragon - Create PDF Invoices and Receipts for Free</title>
-        <meta property="og:title" content="Invoice Dragon - Create PDF Invoices and Receipts for Free" />
+        <title>{t('invoice_dragon')}</title>
+        <title>{t('invoice_dragon_title')}</title>
+        <meta property="og:title" content={t('invoice_dragon_title')} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://invoicedragon.com/" />
-        <meta property="og:image" content="/assets/icon.png" /> 
-        <meta property="og:description" content="Create professional Invoices and Receipts effortlessly with Invoice Dragon and download as PDF for easy sharing and record-keeping. And it's all for free!" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="Invoice Dragon" />
+        <meta property="og:url" content="https://invoicedragon.com/" />
+        <meta property="og:image" content="/assets/icon.png" />
+        <meta property="og:description" content={t('invoice_dragon_description')} />
+        <meta property="og:locale" content={lang} />
+        <meta property="og:site_name" content={t('invoice_dragon')} />
         <meta name="author" content="Lani" />
-        <meta name="description" content="Create professional Invoices and Receipts effortlessly with Invoice Dragon and download as PDF for easy sharing and record-keeping. And it's all for free!" />
-        <meta name="application-name" content="Invoice Dragon" />
+        <meta name="description" content={t('invoice_dragon_description')} />
+        <meta name="application-name" content={t('invoice_dragon_title')} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

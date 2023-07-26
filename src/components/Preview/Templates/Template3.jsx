@@ -1,6 +1,8 @@
 import { Page, Text, Image, View, StyleSheet, Font } from '@react-pdf/renderer';
+import useTranslation from 'next-translate/useTranslation'
 
 const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientPhone, clientEmail, address, city, zipcode, website}) => {
+  const { t } = useTranslation('common')
 
   Font.register({
     family: 'Poppins-Bold',
@@ -189,8 +191,8 @@ const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, c
       flexDirection: 'row'
     }
   })
- 
-  return (  
+
+  return (
     <Page size="A4" style={styles.body}>
       <View>
         <View style={styles.header__section}>
@@ -221,7 +223,7 @@ const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, c
             </View>
           </View>
           <View style={styles.invoice__details}>
-            <Text style={styles.section__tag}>TOTAL DUE</Text>
+            <Text style={styles.section__tag}>{t('total_due')}</Text>
             <Text style={{fontSize: 14, fontFamily: 'Poppins-Bold'}}>
               <Text style={{fontFamily : 'Quicksand-Bold'}}>{currencySymbol}</Text>
               <Text>{totalAmount}</Text>
@@ -233,10 +235,10 @@ const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, c
         </View>
         <View style={styles.invoice__details__section}>
           <View style={styles.invoice_header}>
-            <Text style={{width: '40%'}}>Item</Text>
-            <Text style={{width: '20%', textAlign: 'center'}}>Quantity</Text>
-            <Text style={{width: '20%', textAlign: 'center'}}>Price</Text>
-            <Text style={{width: '20%', textAlign: 'right'}}>Total</Text>
+            <Text style={{width: '40%'}}>{t('item')}</Text>
+            <Text style={{width: '20%', textAlign: 'center'}}>{t('quantity')}</Text>
+            <Text style={{width: '20%', textAlign: 'center'}}>{t('price')}</Text>
+            <Text style={{width: '20%', textAlign: 'right'}}>{t('total')}</Text>
           </View>
           {rows.map(({ id, description, details, rate, quantity, amount }) => (
             <View style={styles.invoice_item} key={id}>
@@ -294,5 +296,5 @@ const Template3 = ({totalAmount, rows, email, phone, logo, logoUpdated, notes, c
     </Page>
   );
 }
- 
+
 export default Template3;
