@@ -2,9 +2,11 @@ import { useRef } from 'react';
 import React from 'react';
 import styles from '../Form/form.module.scss';
 import { useMediaQuery } from 'react-responsive';
+import useTranslation from 'next-translate/useTranslation'
 
 const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow, onFormSubmit }) => {
-  
+  const { t } = useTranslation('common')
+
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
   const rateRef = useRef([]);
   const quantityRef = useRef([]);
@@ -13,8 +15,8 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
       const amount = (parseFloat(rate ? rate : 0) * parseFloat(qty ? qty : 0)).toFixed(2);
       return amount;
   }
-  
-  const tableRows = rows.map((item, index) => { 
+
+  const tableRows = rows.map((item, index) => {
     return (
       <React.Fragment key={item.id}>
         {!isMobile && <tr className={styles.item__row}>
@@ -31,53 +33,53 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
             </div>
           </td>
           <td className={styles.description}>
-            <input 
+            <input
               className={styles.input__default}
-              type="text" 
-              name="description" 
+              type="text"
+              name="description"
               id={`description__${item.id}`}
               key={`des-input_${item.id}`}
-              placeholder="Item Description"
+              placeholder={t('item_description')}
               maxLength={30}
               onChange={(e) => handleChange(e, item)}
-              value={item.description || ''} 
+              value={item.description || ''}
             />
             <textarea
-              name="details" 
+              name="details"
               id={`details__${item.id}`}
               key={`details-input_${item.id}`}
-              placeholder="Additional details..."
+              placeholder={t('additional_details')}
               className={`${styles.input__default} ${styles.details}`}
               onChange={(e) => handleChange(e, item)}
-              value={item.details || ''} 
+              value={item.details || ''}
               ></textarea>
           </td>
           <td className={styles.rate}>
-            <input 
+            <input
               className={styles.input__default}
-              type="number" 
-              name="rate" 
-              id={`rate__${item.id}`} 
+              type="number"
+              name="rate"
+              id={`rate__${item.id}`}
               ref={el => rateRef.current[index] = el}
               placeholder="0.00"
               maxLength={20}
               key={`rate-input_${item.id}`}
               onChange={(e) => handleChange(e, item, index)}
-              value={item.rate || ''} 
+              value={item.rate || ''}
             />
           </td>
           <td className={styles.qty}>
-            <input 
+            <input
               className={styles.input__default}
-              type="number" 
-              name="quantity" 
-              id={`quantity__${item.id}`} 
+              type="number"
+              name="quantity"
+              id={`quantity__${item.id}`}
               ref={el => quantityRef.current[index] = el}
               placeholder="0"
               maxLength={15}
               key={`qty-input_${item.id}`}
               onChange={(e) => handleChange(e, item, index)}
-              value={item.quantity || ''} 
+              value={item.quantity || ''}
             />
           </td>
           <td className={styles.amount}>
@@ -88,60 +90,60 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
         </tr>}
 
         {isMobile && <div className={styles.item__row}>
-          
+
           <div className={styles.description}>
-            <input 
+            <input
               className={styles.input__default}
-              type="text" 
-              name="description" 
+              type="text"
+              name="description"
               id={`description__${item.id}`}
               key={`des-input_${item.id}`}
               placeholder="Item Description"
               maxLength={20}
               onChange={(e) => handleChange(e, item)}
-              value={item.description || ''} 
+              value={item.description || ''}
             />
             <textarea
-              name="details" 
+              name="details"
               id={`details__${item.id}`}
               key={`details-input_${item.id}`}
               placeholder="Additional details"
               className={`${styles.input__default} ${styles.mobile__details}`}
               onChange={(e) => handleChange(e, item)}
-              value={item.details || ''} 
+              value={item.details || ''}
               ></textarea>
           </div>
           <div className={styles.input__group}>
             <div className={styles.rate}>
-              <input 
+              <input
                 className={styles.input__default}
-                type="number" 
-                name="rate" 
-                id={`rate__${item.id}`} 
+                type="number"
+                name="rate"
+                id={`rate__${item.id}`}
                 ref={el => rateRef.current[index] = el}
                 placeholder="price"
                 maxLength={20}
                 key={`rate-input_${item.id}`}
                 onChange={(e) => handleChange(e, item, index)}
-                value={item.rate || ''} 
+                value={item.rate || ''}
               />
             </div>
             <div className={styles.qty}>
-              <input 
+              <input
                 className={styles.input__default}
-                type="number" 
-                name="quantity" 
-                id={`quantity__${item.id}`} 
+                type="number"
+                name="quantity"
+                id={`quantity__${item.id}`}
                 ref={el => quantityRef.current[index] = el}
                 placeholder="0"
                 maxLength={15}
                 key={`qty-input_${item.id}`}
                 onChange={(e) => handleChange(e, item, index)}
-                value={item.quantity || ''} 
+                value={item.quantity || ''}
               />
             </div>
           </div>
-          
+
           <div className={styles.item__row__actions__mobile}>
             <div className={styles.confirm__delete__button}>
               <button
@@ -153,7 +155,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
                 </svg>
                 <span className={styles.btn__text}>Delete</span>
               </button>
-              
+
             </div>
             <div className={styles.amount}>
               <span>{currencySymbol} </span>
@@ -175,7 +177,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
 
   const handleChange = (e, item, index) => {
     let amount;
-    
+
     if (rateRef?.current[index] && quantityRef?.current[index]) {
       let rate = Number(rateRef.current[index].value);
       let quantity = Number(quantityRef.current[index].value);
@@ -185,16 +187,16 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
     onModifyTable(e, item.id, amount);
   }
 
-  return ( 
+  return (
     <div className={styles.table__wrapper}>
       {!isMobile && <table className={styles.table}>
         <thead>
           <tr className={styles.invoice__headers}>
             <th className={styles.controls}>&nbsp;</th>
-            <th className={styles.description}>Description</th>
-            <th className={styles.rate}>Rate</th>
-            <th className={styles.qty}>Qty</th>
-            <th className={styles.amount}>Amount</th>
+            <th className={styles.description}>{t('description')}</th>
+            <th className={styles.rate}>{t('rate')}</th>
+            <th className={styles.qty}>{t('qty')}</th>
+            <th className={styles.amount}>{t('amount')}</th>
             {/* <th className={styles.tax}>Tax</th> */}
           </tr>
         </thead>
@@ -224,5 +226,5 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
     </div>
    );
 }
- 
+
 export default Table;

@@ -1,6 +1,8 @@
 import { Page, Text, Image, View, StyleSheet, Font } from '@react-pdf/renderer';
+import useTranslation from 'next-translate/useTranslation'
 
 const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientEmail, clientPhone, address, phone, email, city, zipcode, website}) => {
+  const { t } = useTranslation('common')
 
   Font.register({
     family: 'League',
@@ -174,10 +176,10 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
         <View style={styles.invoice_group}>
           <View style={styles.invoice_body}>
             <View style={styles.invoice_header}>
-              <Text style={[styles.table_header, {width: '40%'}]}>DESCRIPTION</Text>
-              <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>PRICE</Text>
-              <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>QTY</Text>
-              <Text style={[styles.table_header, {width: '20%', textAlign: 'right'}]}>AMOUNT</Text>
+              <Text style={[styles.table_header, {width: '40%'}]}>{t('description')}</Text>
+              <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>{t('price')}</Text>
+              <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>{t('qty')}</Text>
+              <Text style={[styles.table_header, {width: '20%', textAlign: 'right'}]}>{t('amount')}</Text>
             </View>
 
             {rows.map(({ id, description, details, rate, quantity, amount }) => (
@@ -227,5 +229,5 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
     </Page>
   );
 }
- 
+
 export default Template1;

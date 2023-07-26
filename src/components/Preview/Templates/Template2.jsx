@@ -1,6 +1,10 @@
 import { Page, Text, Image, View, StyleSheet, Font } from '@react-pdf/renderer';
+import useTranslation from 'next-translate/useTranslation'
 
 const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, businessName, InvoiceNo, date, clientName, clientAddress, clientCity, clientZipcode, clientEmail, clientPhone, address, city, zipcode, phone, email, website}) => {
+  const { t } = useTranslation('common')
+
+  alert('tet')
 
   Font.register({
     family: 'Inter-Regular',
@@ -15,7 +19,7 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
     family: 'Roxborough',
     src: "/assets/Roxborough-CF.ttf",
   });
-  
+
   Font.register({
     family: 'Quicksand',
     src: "/assets/Quicksand-Medium.ttf",
@@ -182,8 +186,8 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
       flexDirection: 'row'
     }
   })
- 
-  return (  
+
+  return (
     <Page size="A4" style={styles.body}>
       <View>
         <View style={styles.header__section}>
@@ -196,7 +200,7 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
         </View>
         <View style={styles.billing__section}>
           <View>
-            {clientName && <Text style={styles.section__tag}>BILLED TO:</Text>}
+            {clientName && <Text style={styles.section__tag}>{t('billed_to')}:</Text>}
             {clientName && <Text style={styles.text}>{clientName}</Text>}
             {clientPhone && <Text style={styles.text}>{clientPhone}</Text>}
             {clientEmail && <Text style={styles.text}>{clientEmail}</Text>}
@@ -221,10 +225,10 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
         </View>
         <View style={styles.invoice__details__section}>
           <View style={styles.invoice_header}>
-            <Text style={[styles.table_header, {width: '40%'}]}>Item</Text>
-            <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>Quantity</Text>
-            <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>Unit Price</Text>
-            <Text style={[styles.table_header, {width: '20%', textAlign: 'right'}]}>Total</Text>
+            <Text style={[styles.table_header, {width: '40%'}]}>{t('item')}</Text>
+            <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>{t('quantity')}</Text>
+            <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>{t('unit_price')}</Text>
+            <Text style={[styles.table_header, {width: '20%', textAlign: 'right'}]}>{t('total')}</Text>
           </View>
           {rows.map(({ id, description, details, rate, quantity, amount }) => (
             <View style={styles.invoice_item} key={id}>
@@ -286,5 +290,5 @@ const Template2 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
     </Page>
   );
 }
- 
+
 export default Template2;
