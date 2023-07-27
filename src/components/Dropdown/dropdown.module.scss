@@ -24,6 +24,8 @@
     position: absolute;
     top: 110%;
     padding: 8px;
+    margin-top: 20px;
+    z-index: -2;
     color: #333;
     font-weight: 500;
     background-color: #ffffff;
@@ -59,5 +61,42 @@
 
   .code {
     flex-grow: 1;
+  }
+}
+
+.inputs {
+  display: grid;
+  place-items: center;
+  position: relative;
+  margin-top: 1rem;
+
+  & input{
+    color: #333;
+    font-weight: bold;
+    padding: 12px 16px;
+    background-color: cornflowerblue;
+    background-color: #ffffff;
+    box-shadow: 3px 3px 10px 6px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: inherit;
+    // height: 2rem;
+    width: 16rem;
+    overflow-wrap: break-word;
+    border: none;
+    position: absolute;
+    word-wrap: break-word;
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.search_bar_2 {
+      z-index: -1;
+      color: gray;
+      cursor: none;
+    }
   }
 }
