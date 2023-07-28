@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./dropdown.module.scss";
 import currencies from "../../data/currencies.json";
 import Trie from "../../lib/trie";
@@ -8,6 +8,10 @@ const SearchDropdown = ({ handleChange }) => {
 	const [suggestion, setSuggestion] = useState("");
 	const [suggestions, setSuggestions] = useState(currencies);
 	const myTrie = new Trie();
+
+	useEffect(() => {
+		handleChange(suggestions);
+	}, []);
 
 	const addWords = () => {
 		currencies.forEach((currency) => {
@@ -53,7 +57,6 @@ const SearchDropdown = ({ handleChange }) => {
 			setPrefix(suggestion);
 		}
 	};
-	handleChange(suggestions);
 
 	addWords();
 
