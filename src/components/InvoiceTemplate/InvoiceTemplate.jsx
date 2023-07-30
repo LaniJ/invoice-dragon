@@ -5,16 +5,18 @@ import invTemp2 from '../../assets/images/invTemp2.png';
 import invTemp3 from '../../assets/images/invTemp3.png';
 import invTemp4 from '../../assets/images/invTemp4.png';
 
+import useTranslation from "next-translate/useTranslation";
+
 
 const InvoiceTemplate = ({ template, changeTemplate }) => {
-
+  const {t} = useTranslation('common')
   const handleChange = (e) => {
     changeTemplate(e);
   }
 
   return ( 
     <div className={styles.section}>
-      <h2>Choose a Template</h2>
+      <h2>{t('choose_template')}</h2>
        
       <div className={styles.grid__wrapper}>
         {/* option 1 */}

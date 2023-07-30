@@ -176,7 +176,7 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
             <View style={styles.invoice_header}>
               <Text style={[styles.table_header, {width: '40%'}]}>DESCRIPTION</Text>
               <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>PRICE</Text>
-              <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>QTY</Text>
+              <Text style={[styles.table_header, {width: '20%', textAlign: 'center'}]}>QUANTITY</Text>
               <Text style={[styles.table_header, {width: '20%', textAlign: 'right'}]}>AMOUNT</Text>
             </View>
 
@@ -199,7 +199,7 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
             ))}
           </View>
           <View style={styles.total_section}>
-            <Text style={styles.table_header}>TOTAL</Text>
+            <Text style={styles.table_header}>{t('total')}</Text>
             <Text style={styles.total_amount}>
               <Text style={{fontFamily : 'Quicksand'}}>{currencySymbol}</Text>
               <Text>{totalAmount}</Text>

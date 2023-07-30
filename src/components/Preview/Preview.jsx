@@ -6,7 +6,7 @@ import Template2 from "./Templates/Template2";
 import Template3 from "./Templates/Template3";
 import Template4 from "./Templates/Template4";
 
-const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes, totalAmount }) => {
+const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes, totalAmount, t, lang }) => {
 
   return ( 
     <Document

@@ -14,9 +14,12 @@ import Header from '@/components/Header/Header';
 import logoP from '../assets/images/placeholder-image.png';
 import Previewed from "../components/Preview/Preview";
 
+import useTranslation from 'next-translate/useTranslation';
+
 
 
 const Templates = () => {
+  const {t, lang} = useTranslation('common')
   // const [service, setService] = useState('invoice');
 
   const [showPreview, setShowPreview] = useState(false);
@@ -193,10 +196,10 @@ const Templates = () => {
               </div>
               <div className={styles.action__section}>
                 <div className={styles.actions}>
-                  ACTIONS
+                  {t('actions')}
                   <br />
                   <br />
-                  <button className={styles.action__btn} onClick={handleToggle}>{showPreview ? 'Back to Edit' : 'Preview Invoice'}</button>
+                  <button className={styles.action__btn} onClick={handleToggle}>{showPreview ? `${t('back_to_edit')}` : `${t('preview_invoice')}`}</button>
                   <br />
                   <br />
                   <div>
@@ -204,7 +207,7 @@ const Templates = () => {
                       document={pdf}
                       fileName={`${formData.clientName}_${formData.formName}.pdf`}>
                       {({ blob, url, loading, error }) =>
-                        <button className={styles.action__btn} disabled={!showPreview}>Download PDF</button> 
+                        <button className={styles.action__btn} disabled={!showPreview}>{t('download_pdf')}</button> 
                       }
                     </PDFDownloadLink>
                   </div>

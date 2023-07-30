@@ -3,6 +3,8 @@ import React from 'react';
 import styles from '../Form/form.module.scss';
 import { useMediaQuery } from 'react-responsive';
 
+import useTranslation from 'next-translate/useTranslation';
+
 const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveInvoiceRow, onFormSubmit }) => {
   
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
@@ -14,6 +16,10 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
       return amount;
   }
   
+
+  // translate
+  const {t} = useTranslation('common')
+
   const tableRows = rows.map((item, index) => { 
     return (
       <React.Fragment key={item.id}>
@@ -37,7 +43,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               name="description" 
               id={`description__${item.id}`}
               key={`des-input_${item.id}`}
-              placeholder="Item Description"
+              placeholder={t('item_description')}
               maxLength={30}
               onChange={(e) => handleChange(e, item)}
               value={item.description || ''} 
@@ -46,7 +52,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               name="details" 
               id={`details__${item.id}`}
               key={`details-input_${item.id}`}
-              placeholder="Additional details..."
+              placeholder={t('additional_details')}
               className={`${styles.input__default} ${styles.details}`}
               onChange={(e) => handleChange(e, item)}
               value={item.details || ''} 
@@ -96,7 +102,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               name="description" 
               id={`description__${item.id}`}
               key={`des-input_${item.id}`}
-              placeholder="Item Description"
+              placeholder={t('item_description')}
               maxLength={20}
               onChange={(e) => handleChange(e, item)}
               value={item.description || ''} 
@@ -105,7 +111,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
               name="details" 
               id={`details__${item.id}`}
               key={`details-input_${item.id}`}
-              placeholder="Additional details"
+              placeholder={t('additional_details')}
               className={`${styles.input__default} ${styles.mobile__details}`}
               onChange={(e) => handleChange(e, item)}
               value={item.details || ''} 
@@ -119,7 +125,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
                 name="rate" 
                 id={`rate__${item.id}`} 
                 ref={el => rateRef.current[index] = el}
-                placeholder="price"
+                placeholder={t('price')}
                 maxLength={20}
                 key={`rate-input_${item.id}`}
                 onChange={(e) => handleChange(e, item, index)}
@@ -151,7 +157,7 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
                 onClick={() => handleRemove(item.id)}>
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" className={styles.svg__close__icon} role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
                 </svg>
-                <span className={styles.btn__text}>Delete</span>
+                <span className={styles.btn__text}>{t('delete')}</span>
               </button>
               
             </div>
@@ -191,10 +197,10 @@ const Table = ({ rows, currencySymbol, onModifyTable, onAddInvoiceRow, onRemoveI
         <thead>
           <tr className={styles.invoice__headers}>
             <th className={styles.controls}>&nbsp;</th>
-            <th className={styles.description}>Description</th>
-            <th className={styles.rate}>Rate</th>
-            <th className={styles.qty}>Qty</th>
-            <th className={styles.amount}>Amount</th>
+            <th className={styles.description}>{t('description')}</th>
+            <th className={styles.rate}>{t('rate')}</th>
+            <th className={styles.qty}>{t('qty')}</th>
+            <th className={styles.amount}>{t('amount')}</th>
             {/* <th className={styles.tax}>Tax</th> */}
           </tr>
         </thead>
