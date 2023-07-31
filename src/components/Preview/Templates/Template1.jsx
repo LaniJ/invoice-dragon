@@ -199,7 +199,7 @@ const Template1 = ({totalAmount, rows, logo, notes, currencySymbol, formName, bu
             ))}
           </View>
           <View style={styles.total_section}>
-            <Text style={styles.table_header}>{t('total')}</Text>
+            <Text style={styles.table_header}>TOTAL</Text>
             <Text style={styles.total_amount}>
               <Text style={{fontFamily : 'Quicksand'}}>{currencySymbol}</Text>
               <Text>{totalAmount}</Text>
