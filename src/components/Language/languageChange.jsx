@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const LanguageChange = () => {
-    const { t, lang } = useTranslation('common')
+    const { t,   lang } = useTranslation('common')
     const router = useRouter()
     const [selectedLanguage, setSelectedLanguage] = useState('en')
-    console.log(lang);
+    
     const handleChangeLanguage = (e) => {
         const selectedLanguage = e.target.value
         setSelectedLanguage(selectedLanguage)
@@ -17,19 +17,19 @@ const LanguageChange = () => {
 
     //local storage gets the selected language
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const storedLanguage = localStorage.getItem('selectedLanguage');
-            if (storedLanguage && lang !== storedLanguage) {
-                setSelectedLanguage(lang);
-            }
+       if(typeof window !== 'undefined'){
+         const storedLanguage = localStorage.getItem('selectedLanguage');
+        if (storedLanguage && lang !== storedLanguage) {
+            setSelectedLanguage(lang);
         }
+       }
     }, [])
 
     //local storage sets the selected language
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('selectedLanguage', selectedLanguage);
-        }
+       if(typeof window !== 'undefined'){
+        localStorage.setItem('selectedLanguage', selectedLanguage);
+       }
     }, [selectedLanguage]);
 
 
