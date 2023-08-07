@@ -3,7 +3,7 @@ import styles from "./dropdown.module.scss";
 import currencies from "../../data/currencies.json";
 import Trie from "../../lib/trie";
 
-const SearchDropdown = ({ innerRef, handleChange }) => {
+const SearchDropdown = ({ innerRef, handleChange, selectSuggestion }) => {
 	const [prefix, setPrefix] = useState("");
 	const [suggestion, setSuggestion] = useState("");
 	const [suggestions, setSuggestions] = useState(currencies);
@@ -53,8 +53,11 @@ const SearchDropdown = ({ innerRef, handleChange }) => {
 	};
 	const handleKeyDown = (e) => {
 		// Right button
-		if (e.keyCode === 39) {
+		if (e.keyCode === 39 || e.keyCode === 13) {
 			setPrefix(suggestion);
+			if (suggestions.length) {
+				selectSuggestion(suggestions[0]);
+			}
 		}
 	};
 
@@ -67,7 +70,7 @@ const SearchDropdown = ({ innerRef, handleChange }) => {
 				name="search-bar"
 				className={styles.search_bar_1}
 				id="search_bar_1"
-				placeholder="Search..."
+				placeholder="Search Country..."
 				value={prefix}
 				onChange={handleInputChange}
 				onKeyDown={handleKeyDown}
