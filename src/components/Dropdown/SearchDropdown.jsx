@@ -3,7 +3,7 @@ import styles from "./dropdown.module.scss";
 import currencies from "../../data/currencies.json";
 import Trie from "../../lib/trie";
 
-const SearchDropdown = ({ handleChange }) => {
+const SearchDropdown = ({ innerRef, handleChange }) => {
 	const [prefix, setPrefix] = useState("");
 	const [suggestion, setSuggestion] = useState("");
 	const [suggestions, setSuggestions] = useState(currencies);
@@ -11,7 +11,7 @@ const SearchDropdown = ({ handleChange }) => {
 
 	useEffect(() => {
 		handleChange(suggestions);
-	}, []);
+	}, [suggestions]);
 
 	const addWords = () => {
 		currencies.forEach((currency) => {
@@ -71,6 +71,7 @@ const SearchDropdown = ({ handleChange }) => {
 				value={prefix}
 				onChange={handleInputChange}
 				onKeyDown={handleKeyDown}
+				ref={innerRef}
 			/>
 			<input
 				type="text"

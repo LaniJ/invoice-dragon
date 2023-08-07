@@ -1,22 +1,37 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import SearchDropdown from "./SearchDropdown"
 import styles from './dropdown.module.scss';
 import currencies from '../../data/currencies.json';
 
+const useFocus = () => {
+	const htmlElRef = useRef(null);
+	const setFocus = () => {
+		htmlElRef.current && htmlElRef.current.focus();
+	};
+	return [htmlElRef, setFocus];
+};
+
 const Dropdown = ({ currencyCode, currencySymbol, onCurrencyModify }) => {
   const [suggestions, setSuggestions] = useState(currencies);
   const [isActive, setIsActive] = useState(false);
+  const [inputRef, setInputFocus] = useFocus();
 
-  const handleClick = (currency) => {
+  const handleCurrencyClick = (currency) => {
     onCurrencyModify(currency)
     setIsActive(false);
   }
+  const handleDropdownClick = ()=>{
+    setIsActive(!isActive);
+    setTimeout(() => {
+      setInputFocus();
+    }, 100);
+  };
 
   return ( 
     <div className={styles.dropdown}>
       {!isActive? (<div 
         className={styles.dropdown__btn}
-        onClick={() => setIsActive(!isActive)}
+        onClick={handleDropdownClick}
       >
         <div className={styles.selected__currency}>
           <span className={styles.code}>{currencyCode} </span>
@@ -24,7 +39,7 @@ const Dropdown = ({ currencyCode, currencySymbol, onCurrencyModify }) => {
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
       </div>): (
-        <SearchDropdown handleChange={setSuggestions} />
+        <SearchDropdown handleChange={setSuggestions} innerRef={inputRef} />
       )}
       {isActive && (
         <div className={styles.dropdown__content}>
@@ -33,14 +48,14 @@ const Dropdown = ({ currencyCode, currencySymbol, onCurrencyModify }) => {
               ? <div 
                 className={`${styles.dropdown__item} ${styles.accent}`} 
                 key={index}
-                onClick={() => handleClick(currency)}>
+                onClick={() => handleCurrencyClick(currency)}>
                   <span className={styles.code}>{currency.code}</span>
                   <span className={styles.symbol}>{currency.symbol}</span>
               </div>
               : <div 
                 className={styles.dropdown__item} 
                 key={index}
-                onClick={() => handleClick(currency)}>
+                onClick={() => handleCurrencyClick(currency)}>
                   <span className={styles.code}>{currency.code}</span>
                   <span className={styles.symbol}>{currency.symbol}</span>
               </div>
