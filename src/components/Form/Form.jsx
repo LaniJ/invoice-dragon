@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from './form.module.scss';
-import Table from '../Table/Table'
-import Image from 'next/image'
+import Table from '../Table/Table';
+import Image from 'next/image';
 
 import useTranslation from "next-translate/useTranslation";
 
@@ -48,39 +48,39 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
     })
     return sum;
   }
-  
-  //useTranslation
-  const {t} = useTranslation('common')
-  return (  
+
+  const { t } = useTranslation('common');
+
+  return (
     <div>
       <form className={styles.form}>
         <div className={styles.header}>
-          <input 
+          <input
             className={`${styles.invoice__title} ${styles.input__default}`}
-            type="text" 
-            name="formName" 
-            id="formName" 
-            placeholder="Invoice"
+            type="text"
+            name="formName"
+            id="formName"
+            placeholder={`${t('invoice')}`}
             onChange={handleChange}
-            value={prefill.formName || ''} 
+            value={prefill.formName || ''}
           />
           <div className={styles.photo__drop__zone}>
-            <input 
+            <input
               className={styles.logo__input}
               accept="image/jpeg ,image/jpg ,image/png ,image/webp"
-              type="file" 
-              name="logo" 
-              id="logo" 
+              type="file"
+              name="logo"
+              id="logo"
               placeholder='logo'
               ref={imageRef}
               onChange={imageHandler}
             />
             <div className={styles.img__holder} onClick={changeImage}>
-              
+
               {logo && <Image
                 src={logo}
                 className={styles.logo}
-                alt="company logo" 
+                alt="company logo"
                 width={150}
                 height={150}
               />}
@@ -101,199 +101,199 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
             <br /><br />
             <div className={styles.form__field}>
               <label htmlFor="businessName" className={styles.label}>{t('name')}</label>
-              <input 
+              <input
                 className={styles.input__default}
-                type="text" 
-                name="businessName" 
-                id="businessName" 
-                placeholder="Business Name"
+                type="text"
+                name="businessName"
+                id="businessName"
+                placeholder={`${t('business_name_placeholder')}`}
                 onChange={handleChange}
-                value={`${t('business_name_placeholder')}` || ''}  
+                value={prefill.businessName || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="email" className={styles.label}> {t('email')}</label>
-                <input
-                  className={styles.input__default}
-                  type="email" 
-                  name="email" 
-                  id="email" 
-                  placeholder={t('business_email_placeholder')}
-                  onChange={handleChange}
-                  value={prefill.email || ''} 
-                />
+              <input
+                className={styles.input__default}
+                type="email"
+                name="email"
+                id="email"
+                placeholder={t('business_email_placeholder')}
+                onChange={handleChange}
+                value={prefill.email || ''}
+              />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="address" className={styles.label}> {t('address')}</label>
               <input
                 className={styles.input__default}
-                type="text" 
-                name="address" 
-                id="address" 
+                type="text"
+                name="address"
+                id="address"
                 placeholder={t('street_placeholder')}
                 onChange={handleChange}
-                value={prefill.address || ''} 
+                value={prefill.address || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="city" className={styles.label}></label>
               <input
                 className={styles.input__default}
-                type="text" 
-                name="city" 
-                id="city" 
+                type="text"
+                name="city"
+                id="city"
                 placeholder={t('city_state_country_placeholder')}
                 onChange={handleChange}
-                value={prefill.city || ''} 
+                value={prefill.city || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="zipcode" className={styles.label}></label>
               <input
                 className={styles.input__default}
-                type="text" 
-                name="zipcode" 
-                id="zipcode" 
+                type="text"
+                name="zipcode"
+                id="zipcode"
                 placeholder={t('postal_code_placeholder')}
                 onChange={handleChange}
-                value={prefill.zipcode || ''} 
+                value={prefill.zipcode || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="phone" className={styles.label}>{t('phone')}</label>
               <input
                 className={styles.input__default}
-                type="tel" 
-                name="phone" 
-                id="phone" 
+                type="tel"
+                name="phone"
+                id="phone"
                 placeholder={t('phone_placeholder')}
                 onChange={handleChange}
-                value={prefill.phone || ''} 
+                value={prefill.phone || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="website" className={styles.label}>{t('website')}</label>
               <input
                 className={styles.input__default}
-                type="text" 
-                name="website" 
-                id="website" 
+                type="text"
+                name="website"
+                id="website"
                 placeholder={t('website_placeholder')}
                 onChange={handleChange}
-                value={prefill.website || ''} 
+                value={prefill.website || ''}
               />
             </div>
           </div>
 
           <div>
-            <h3>{t('bill_to')}</h3>  
+            <h3>{t('bill_to')}</h3>
             <br /><br />
             <div className={styles.form__field}>
               <label htmlFor="clientName" className={styles.label}>{t('name')}</label>
-              <input 
+              <input
                 className={styles.input__default}
-                type="text" 
-                name="clientName" 
-                id="clientName" 
-                placeholder="Business Name"
+                type="text"
+                name="clientName"
+                id="clientName"
+                placeholder={`${t('business_name_placeholder')}`}
                 onChange={handleChange}
-                value={`${t('business_name_placeholder')}` || ''} 
+                value={prefill.clientName || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="clientEmail" className={styles.label}>{t('email')}</label>
-                <input
-                  className={styles.input__default}
-                  type="email" 
-                  name="clientEmail" 
-                  id="clientEmail" 
-                  placeholder="name@clientemail.com"
-                  onChange={handleChange}
-                  value={`${t('client_email_placeholder')}` || ''} 
-                />
+              <input
+                className={styles.input__default}
+                type="email"
+                name="clientEmail"
+                id="clientEmail"
+                placeholder={`${t('client_email_placeholder')}`}
+                onChange={handleChange}
+                value={prefill.clientEmail || ''}
+              />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="clientAddress" className={styles.label}>{t('address')}</label>
               <input
                 className={styles.input__default}
-                type="text" 
-                name="clientAddress" 
-                id="clientAddress" 
+                type="text"
+                name="clientAddress"
+                id="clientAddress"
                 placeholder={t('street_placeholder')}
                 onChange={handleChange}
-                value={prefill.clientAddress || ''} 
+                value={prefill.clientAddress || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="clientCity" className={styles.label}></label>
               <input
                 className={styles.input__default}
-                type="text" 
-                name="clientCity" 
-                id="clientCity" 
+                type="text"
+                name="clientCity"
+                id="clientCity"
                 placeholder={t('city_state_country_placeholder')}
                 onChange={handleChange}
-                value={prefill.clientCity || ''} 
+                value={prefill.clientCity || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="clientZipcode" className={styles.label}></label>
               <input
                 className={styles.input__default}
-                type="text" 
-                name="clientZipcode" 
-                id="clientZipcode" 
+                type="text"
+                name="clientZipcode"
+                id="clientZipcode"
                 placeholder={t('postal_code_placeholder')}
                 onChange={handleChange}
-                value={`${t('postal_code_placeholder')}` || ''} 
+                value={prefill.clientZipcode || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="clientPhone" className={styles.label}>{t('phone')}</label>
               <input
                 className={styles.input__default}
-                type="tel" 
-                name="clientPhone" 
-                id="clientPhone" 
-                placeholder="(123) 456 789"
+                type="tel"
+                name="clientPhone"
+                id="clientPhone"
+                placeholder={`${t('phone_placeholder')}`}
                 onChange={handleChange}
-                value={`${t('phone_placeholder')}` || ''} 
+                value={prefill.clientPhone || ''}
               />
             </div>
           </div>
         </div>
-        <hr className={styles.divider}/>
+        <hr className={styles.divider} />
         <div className={styles.row__group}>
-          <div  className={styles.group}>
+          <div className={styles.group}>
             <div className={styles.form__field}>
               <label htmlFor="InvoiceNo" className={styles.label}>{t('invoice_no')}</label>
               <input
                 className={styles.input__default}
-                type="text" 
-                name="InvoiceNo" 
-                id="InvoiceNo" 
+                type="text"
+                name="InvoiceNo"
+                id="InvoiceNo"
                 placeholder="IN001"
                 onChange={handleChange}
-                value={prefill.InvoiceNo || ''} 
+                value={prefill.InvoiceNo || ''}
               />
             </div>
             <div className={styles.form__field}>
               <label htmlFor="date" className={styles.label}>{t('due_date')}</label>
               <input
                 className={styles.input__default}
-                type="date" 
-                name="date" 
-                id="date" 
+                type="date"
+                name="date"
+                id="date"
                 onChange={handleChange}
-                value={prefill.date || ''} 
+                value={prefill.date || ''}
               />
             </div>
           </div>
         </div>
 
         {/* invoice list table */}
-        <Table 
-          rows={rows} 
+        <Table
+          rows={rows}
           prefill={prefill}
           onAddInvoiceRow={addRow}
           onRemoveInvoiceRow={removeRow}
@@ -309,16 +309,16 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
         <div>
           <p>{t('notes')}</p>
           <textarea
-            name="notes" 
+            name="notes"
             id="notes"
             onChange={handleChange}
-            value={`${t('notes_comment')}` || ''} 
-            style={{height: '135px', marginTop: '18px', resize: 'none', fontFamily: 'Arial'}}
-            placeholder="Notes - any relevant information not covered, additional terms and conditions."
+            value={prefill.notes || ''}
+            style={{ height: '135px', marginTop: '18px', resize: 'none', fontFamily: 'Arial' }}
+            placeholder={`${t('notes_comment')}`}
             className={`${styles.input__default} ${styles.details}`}></textarea>
         </div>
         {/* Took out signature and photo sections */}
-        
+
         {/* <section>
           <span>
             <p>Signature</p>
@@ -347,5 +347,5 @@ const Form = ({ logo, updateLogo, logoUpdated, prefill, currencySymbol, rows, on
     </div>
   );
 }
- 
+
 export default Form;
