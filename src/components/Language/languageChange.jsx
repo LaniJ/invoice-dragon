@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const LanguageChange = () => {
-    const { t, lang } = useTranslation('common');
+    const { lang } = useTranslation('common');
     const router = useRouter();
-    const [selectedLanguage, setSelectedLanguage] = useState('en');
+    const [selectedLanguage, setSelectedLanguage] = useState(lang);
 
     const handleChangeLanguage = (e) => {
         const selectedLanguage = e.target.value;
@@ -22,7 +22,7 @@ const LanguageChange = () => {
                 setSelectedLanguage(lang);
             }
         }
-    }, [])
+    }, [lang])
 
     //local storage sets the selected language
     useEffect(() => {
