@@ -8,15 +8,15 @@ import Template4 from "./Templates/Template4";
 
 const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, email, businessName, address, city, zipcode, phone, owner, clientName, clientEmail, clientAddress, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes, totalAmount }) => {
 
-  return ( 
+  return (
     <Document
       author={owner}
       keywords="invoice, receipt"
       subject={`${businessName} Invoice`}
       title={`${clientName} ${formName} `}
     >
-      {template === 'template1' && 
-        <Template1 
+      {template === 'template1' &&
+        <Template1
           logo={logo}
           formName={formName}
           businessName={businessName}
@@ -39,10 +39,10 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, emai
           city={city}
           zipcode={zipcode}
           website={website}
-        /> 
+        />
       }
-      {template === 'template2' && 
-        <Template2 
+      {template === 'template2' &&
+        <Template2
           logo={logo}
           formName={formName}
           businessName={businessName}
@@ -65,10 +65,10 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, emai
           city={city}
           zipcode={zipcode}
           website={website}
-        /> 
+        />
       }
-      {template === 'template3' && 
-        <Template3 
+      {template === 'template3' &&
+        <Template3
           logo={logo}
           logoUpdated={logoUpdated}
           formName={formName}
@@ -92,10 +92,10 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, emai
           email={email}
           phone={phone}
           website={website}
-        /> 
+        />
       }
-      {template === 'template4' && 
-        <Template4 
+      {template === 'template4' &&
+        <Template4
           logo={logo}
           formName={formName}
           businessName={businessName}
@@ -118,14 +118,14 @@ const PDF = ({ template, rows, currencySymbol, formName, logo, logoUpdated, emai
           phone={phone}
           email={email}
           website={website}
-        /> 
+        />
       }
     </Document>
-   );
+  );
 }
 
 const PDFView = ({ template, rows, currencySymbol, formName, logo, logoUpdated, email, businessName, address, city, zipcode, phone, owner, clientName, clientAddress, clientEmail, clientCity, clientZipcode, clientPhone, date, InvoiceNo, website, notes }) => {
-  
+
   const [client, setClient] = useState(false);
 
   useEffect(() => {
@@ -178,15 +178,15 @@ const PDFView = ({ template, rows, currencySymbol, formName, logo, logoUpdated, 
       totalAmount={totalAmount}
     />
   );
-  
-  return ( 
+
+  return (
     <>
       <PDFViewer className={styles.full}>
-       {pdf}
+        {pdf}
       </PDFViewer>
     </>
-   );
+  );
 }
- 
+
 export default PDFView;
 export { PDF };
