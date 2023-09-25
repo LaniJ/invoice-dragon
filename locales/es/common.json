@@ -19,6 +19,7 @@
     "delete": "eliminar",
     "description": "Descripción",
     "download_pdf": "Descargar PDF",
+    "download_json": "Download JSON",
     "due_date": "Fecha de vencimiento",
     "email": "Correo electrónico",
     "from": "De",
