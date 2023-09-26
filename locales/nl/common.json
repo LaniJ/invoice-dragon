@@ -19,6 +19,7 @@
     "delete": "verwijderen",
     "description": "Beschrijving",
     "download_pdf": "Download PDF",
+    "download_json": "Download JSON",
     "due_date": "Vervaldatum",
     "email": "E-mail",
     "from": "Van",

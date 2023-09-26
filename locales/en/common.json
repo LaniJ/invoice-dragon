@@ -18,6 +18,7 @@
     "delete": "delete",
     "description": "Description",
     "download_pdf": "Download PDF",
+    "download_json": "Download JSON",
     "due_date": "Due Date",
     "email": "Email",
     "from": "From",
