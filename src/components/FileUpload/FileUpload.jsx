@@ -1,8 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 
-import styles from "./fileupload.module.scss";
-
 const baseStyle = {
     flex: 1,
     display: "flex",
@@ -75,7 +73,7 @@ export const FileUpload = ({ onFileUpload }) => {
     );
 
     return (
-        <div className="container">
+        <div className="container" style={{marginTop: 20}}>
             <div {...getRootProps({ style })}>
                 <input {...getInputProps()} />
                 <p>Drag and drop a JSON file here, or click to select one</p>
